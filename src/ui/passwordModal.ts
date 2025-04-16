@@ -2,33 +2,51 @@ import { App, Modal, Setting, Notice } from "obsidian";
 
 export class PasswordModal extends Modal {
   password: string = "";
-  onSuccess: (password: string) => void;
+  confirmPassword: string = "";
+  onSuccess: (password: string, encryptionMethod: "AES" | "ECC") => void;
   onCancel: () => void;
   encryptionMode: "temporary" | "permanent" = "temporary";
+  encryptionMethod: "AES" | "ECC" = "AES";
   private isSubmitted: boolean = false;
   private isDecrypt: boolean = false;
+  private requirePasswordConfirmation: boolean = false;
 
   constructor(
     app: App,
-    onSuccess: (password: string) => void,
+    onSuccess: (password: string, encryptionMethod: "AES" | "ECC") => void,
     onCancel: () => void,
     defaultMode: "temporary" | "permanent" = "temporary",
-    isDecrypt: boolean = false
+    isDecrypt: boolean = false,
+    requirePasswordConfirmation: boolean = false
   ) {
     super(app);
     this.onSuccess = onSuccess;
     this.onCancel = onCancel;
     this.encryptionMode = defaultMode;
     this.isDecrypt = isDecrypt;
+    this.requirePasswordConfirmation = requirePasswordConfirmation;
   }
 
   onOpen() {
     const { contentEl } = this;
     contentEl.empty();
 
-    contentEl.createEl("h2", { text: "Enter Password" });
+    contentEl.createEl("h2", { text: "Eccidian Encryption" });
 
     if (!this.isDecrypt) {
+      new Setting(contentEl)
+        .setName("Encryption Method")
+        .setDesc("Choose encryption method")
+        .addDropdown(drop =>
+          drop
+            .addOption("AES", "AES-256 (Symmetric)")
+            .addOption("ECC", "ECC (Asymmetric)")
+            .setValue(this.encryptionMethod)
+            .onChange(value => {
+              this.encryptionMethod = value as "AES" | "ECC";
+            })
+        );
+
       new Setting(contentEl)
         .setName("Encryption Mode")
         .setDesc("Choose encryption mode")
@@ -55,10 +73,31 @@ export class PasswordModal extends Modal {
         text.inputEl.type = "password";
         text.inputEl.addEventListener('keypress', (e) => {
           if (e.key === 'Enter' && this.password) {
-            this.submit();
+            if (!this.requirePasswordConfirmation || this.confirmPassword) {
+              this.submit();
+            }
           }
         });
       });
+
+    if (!this.isDecrypt && this.requirePasswordConfirmation) {
+      new Setting(contentEl)
+        .setName("Confirm Password")
+        .addText(text => {
+          text
+            .setPlaceholder("Confirm password")
+            .setValue(this.confirmPassword)
+            .onChange(value => {
+              this.confirmPassword = value;
+            });
+          text.inputEl.type = "password";
+          text.inputEl.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && this.password && this.confirmPassword) {
+              this.submit();
+            }
+          });
+        });
+    }
 
     new Setting(contentEl)
       .addButton(button => {
@@ -84,9 +123,21 @@ export class PasswordModal extends Modal {
       new Notice("Please enter a password");
       return;
     }
+
+    if (!this.isDecrypt && this.requirePasswordConfirmation) {
+      if (!this.confirmPassword) {
+        new Notice("Please confirm your password");
+        return;
+      }
+      if (this.password !== this.confirmPassword) {
+        new Notice("Passwords do not match");
+        return;
+      }
+    }
+
     this.isSubmitted = true;
     this.close();
-    this.onSuccess(this.password);
+    this.onSuccess(this.password, this.encryptionMethod);
   }
 
   onClose() {

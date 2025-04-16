@@ -1,5 +1,6 @@
 import { Plugin, TFile, Notice, WorkspaceLeaf } from "obsidian";
 import { encryptWithPassword, decryptWithPassword } from "./encryption/aesWithPassword";
+import { encryptWithPassword as eccEncrypt, decryptWithPassword as eccDecrypt } from "./encryption/eccWithPassword";
 import { PasswordModal } from "./ui/passwordModal";
 import { EccEncryptSettingTab } from "./ui/settingsTab";
 import { DEFAULT_SETTINGS, EccEncryptSettings } from "./settings";
@@ -26,10 +27,10 @@ export default class EccEncryptPlugin extends Plugin {
         
         new PasswordModal(
           this.app,
-          async (password) => {
+          async (password, encryptionMethod) => {
             try {
               if (fileContent.includes("%%ENC")) {
-                if (this.settings.encryptionMethod === "AES") {
+                if (encryptionMethod === "AES") {
                   const saltMatch = fileContent.match(/SALT:(.+)/);
                   const ivMatch = fileContent.match(/IV:(.+)/);
                   const dataMatch = fileContent.match(/DATA:(.+)/);
@@ -50,10 +51,30 @@ export default class EccEncryptPlugin extends Plugin {
                     new Notice("Decryption failed: Invalid file format");
                   }
                 } else {
-                  new Notice("ECC decryption not implemented");
+                  const saltMatch = fileContent.match(/SALT:(.+)/);
+                  const ivMatch = fileContent.match(/IV:(.+)/);
+                  const dataMatch = fileContent.match(/DATA:(.+)/);
+                  const publicKeyMatch = fileContent.match(/PUBLIC_KEY:(.+)/);
+
+                  if (saltMatch && ivMatch && dataMatch && publicKeyMatch) {
+                    const decrypted = await eccDecrypt(
+                      password,
+                      saltMatch[1],
+                      ivMatch[1],
+                      dataMatch[1],
+                      publicKeyMatch[1]
+                    );
+                    await this.app.vault.modify(activeFile, decrypted);
+                    const mdFile = await changeFileExtension(this.app.vault, activeFile, "md");
+                    new Notice("File decrypted");
+                    const leaf = this.app.workspace.getLeaf();
+                    await leaf.openFile(mdFile);
+                  } else {
+                    new Notice("Decryption failed: Invalid file format");
+                  }
                 }
               } else {
-                if (this.settings.encryptionMethod === "AES") {
+                if (encryptionMethod === "AES") {
                   const { salt, iv, data } = await encryptWithPassword(password, fileContent);
                   const encrypted = `%%ENC\nSALT:${salt}\nIV:${iv}\nDATA:${data}`;
                   await this.app.vault.modify(activeFile, encrypted);
@@ -62,7 +83,13 @@ export default class EccEncryptPlugin extends Plugin {
                   const leaf = this.app.workspace.getLeaf();
                   await leaf.openFile(eccFile);
                 } else {
-                  new Notice("ECC encryption not implemented");
+                  const { salt, iv, data, publicKey } = await eccEncrypt(password, fileContent);
+                  const encrypted = `%%ENC\nSALT:${salt}\nIV:${iv}\nDATA:${data}\nPUBLIC_KEY:${publicKey}`;
+                  await this.app.vault.modify(activeFile, encrypted);
+                  const eccFile = await changeFileExtension(this.app.vault, activeFile, "eccidian");
+                  new Notice("File encrypted");
+                  const leaf = this.app.workspace.getLeaf();
+                  await leaf.openFile(eccFile);
                 }
               }
             } catch (err) {
@@ -73,7 +100,8 @@ export default class EccEncryptPlugin extends Plugin {
           },
           () => {},
           this.settings.defaultEncryptionMode,
-          fileContent.includes("%%ENC")
+          fileContent.includes("%%ENC"),
+          this.settings.requirePasswordConfirmation
         ).open();
       }
     });
