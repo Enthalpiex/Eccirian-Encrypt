@@ -37,18 +37,12 @@ export class EccidianView extends FileView {
   }
 
   async setState(state: any, result: ViewStateResult): Promise<void> {
-    console.log("Setting state:", state);
-
     await super.setState(state, result);
 
     if (state?.file instanceof TFile) {
       this.file = state.file;
       this.filePath = state.file.path;
       this.updateTitle(state.file.basename);
-      console.log("Updated file state:", {
-        path: this.filePath,
-        basename: state.file.basename
-      });
     }
 
     await this.onOpen();
@@ -63,7 +57,6 @@ export class EccidianView extends FileView {
   }
 
   async onOpen() {
-    console.log("Opening view with file:", this.file?.path);
     const container = this.containerEl.children[1];
     container.empty();
 
@@ -133,8 +126,6 @@ export class EccidianView extends FileView {
       });
 
       unlockBtn.addEventListener('click', async () => {
-        console.log("Unlock button clicked");
-        
         if (this.filePath) {
           const file = this.app.vault.getAbstractFileByPath(this.filePath);
           if (file instanceof TFile) {
@@ -150,13 +141,9 @@ export class EccidianView extends FileView {
         let mdFile: TFile;
         try {
           mdFile = await changeFileExtension(this.app.vault, this.file, "md");
-          console.log("File extension changed to .md:", mdFile.path);
-
           const content = await this.app.vault.read(mdFile);
-          console.log("File content read successfully");
           
           if (!content.includes("%%ENC")) {
-            console.log("File is not encrypted, keeping as .md");
             new Notice("This is not an encrypted file, restored as normal file");
             const leaf = this.app.workspace.getLeaf();
             await leaf.openFile(mdFile, { state: { mode: "source" } });
@@ -168,7 +155,6 @@ export class EccidianView extends FileView {
           const dataMatch = content.match(/DATA:(.+)/);
 
           if (!saltMatch || !ivMatch || !dataMatch) {
-            console.error("Invalid file format - missing encryption components");
             await changeFileExtension(this.app.vault, mdFile, "eccidian");
             new Notice("Decryption failed: Invalid file format");
             return;
@@ -180,16 +166,13 @@ export class EccidianView extends FileView {
               try {
                 let decrypted: string;
                 try {
-                  console.log("Attempting decryption...");
                   decrypted = await decryptWithPassword(
                     password,
                     saltMatch[1],
                     ivMatch[1],
                     dataMatch[1]
                   );
-                  console.log("Decryption successful");
                 } catch (err) {
-                  console.error("Decryption failed with error:", err);
                   await changeFileExtension(this.app.vault, mdFile, "eccidian");
                   new Notice("Decryption failed: Password may be incorrect");
                   return;
@@ -208,33 +191,29 @@ export class EccidianView extends FileView {
                 }
 
               } catch (err) {
-                console.error("Unexpected error during decryption process:", err);
                 await changeFileExtension(this.app.vault, mdFile, "eccidian");
                 new Notice("Decryption failed: Unexpected error");
                 return;
               }
             },
             async () => {
-              console.log("Password input cancelled");
               try {
                 await changeFileExtension(this.app.vault, mdFile, "eccidian");
-                console.log("File extension restored to .eccidian");
               } catch (err) {
-                console.error("Failed to restore file extension:", err);
+                new Notice("Failed to restore file extension");
               }
             },
             "temporary",
             true
           ).open();
         } catch (err) {
-          console.error("Failed to change file extension:", err);
+          new Notice("Failed to change file extension");
         }
       });
     }
   }
 
   async onClose() {
-    console.log("onClose called");
     await super.onClose();
   }
 }

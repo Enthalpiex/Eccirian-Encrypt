@@ -181,28 +181,22 @@ export default class EccEncryptPlugin extends Plugin {
     this.registerEvent(
       this.app.workspace.on("file-open", async (file) => {
         if (file && file instanceof TFile && file.extension === "eccidian") {
-          console.log("Handling .eccidian file open:", file.path);
-          
           let leaf: WorkspaceLeaf;
           const activeLeaf = this.app.workspace.getActiveViewOfType(EccidianView)?.leaf;
           
           if (activeLeaf) {
-            console.log("Reusing existing leaf");
             leaf = activeLeaf;
           } else {
-            console.log("Creating new leaf");
             leaf = this.app.workspace.getLeaf();
           }
 
           if (leaf.view.getViewType() !== ECCIDIAN_VIEW_TYPE) {
-            console.log("Setting view type to", ECCIDIAN_VIEW_TYPE);
             await leaf.setViewState({
               type: ECCIDIAN_VIEW_TYPE,
               active: true
             });
           }
 
-          console.log("Setting file to view");
           const view = leaf.view as EccidianView;
           const currentFile = this.app.vault.getAbstractFileByPath(file.path);
           if (currentFile instanceof TFile) {
