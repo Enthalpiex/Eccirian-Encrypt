@@ -1,6 +1,6 @@
 {
 	"id": "Eccidian-plugin",
-	"name": "Eccidian",
+	"name": "Eccidian Encrypt",
 	"version": "1.0.0",
 	"minAppVersion": "0.15.0",
 	"description": "Encrypt your notes using asymmetric encryption.",
