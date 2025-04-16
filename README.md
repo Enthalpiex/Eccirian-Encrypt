@@ -1,6 +1,6 @@
 ![Eccidian_RDM2](https://github.com/user-attachments/assets/9e9392c2-c123-4e01-8484-cd7a50b36d9d)
 
-# Eccidian – Encrypted Files for Obsidian
+# Eccidian Encrypt – Encrypted Files for Obsidian
 
 **Eccidian** is a security-focused Obsidian encryption plugin that supports seamless encryption and decryption of files using multiple advanced password-based encryption methods. It introduces a custom `.eccidian` file extension and provides a unique read-only view for locked files, allowing you to easily manage sensitive information directly in Obsidian.
 
