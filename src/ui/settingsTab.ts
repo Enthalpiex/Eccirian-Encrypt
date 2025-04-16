@@ -103,7 +103,7 @@ export class EccEncryptSettingTab extends PluginSettingTab {
 
     new Setting(containerEl)
       .setName("Icon Style | 图标样式")
-      .setDesc("Choose the icon style for the sidebar | 选择侧边栏图标样式")
+      .setDesc("Choose the icon style for the lock page | 选择锁定页面图标样式")
       .addDropdown(drop =>
         drop
           .addOption("lock", "🔒 Lock | 锁")
