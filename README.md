@@ -1,4 +1,4 @@
-![Eccidian_RDM2](https://github.com/user-attachments/assets/9e9392c2-c123-4e01-8484-cd7a50b36d9d)
+![Eccidian_RDM2 - pre](https://github.com/user-attachments/assets/e6ae4359-d1fe-4613-99b0-3edf6007cdec)
 
 # Eccidian Encrypt – Encrypted Files for Obsidian
 
