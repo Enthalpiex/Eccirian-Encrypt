@@ -1,6 +1,6 @@
 ![Eccidian_RDM2 - pre](https://github.com/user-attachments/assets/e6ae4359-d1fe-4613-99b0-3edf6007cdec)
 
-# WARNING
+# ⚠️WARNING
 
 This plugin is in the early access stage, and the encryption algorithm may change.
 Please **DO NOT** update the version at will before the stable version is released.
