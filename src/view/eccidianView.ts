@@ -17,7 +17,7 @@ export class EccidianView extends FileView {
     super(leaf);
     this.filePath = "";
     this.navigation = true;
-    this.plugin = (this.app as any).plugins.getPlugin('Eccidian-plugin');
+    this.plugin = (this.app as any).plugins.getPlugin('eccidian');
   }
 
   updateTitle(newTitle: string) {
