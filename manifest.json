@@ -1,7 +1,7 @@
 {
 	"id": "Eccidian-plugin",
 	"name": "Eccidian Encrypt",
-	"version": "1.0.0",
+	"version": "0.1.0",
 	"minAppVersion": "0.15.0",
 	"description": "Encrypt your notes using advanced encryption algorithms.",
 	"author": "Entropiex",
