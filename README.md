@@ -14,7 +14,7 @@ Please **DO NOT** update the version at will before the stable version is releas
 ##  Features
 
 - 🔁 One-click encryption and decryption of `.md` files (or any other types) into `.eccidian`, and vice versa.
-- 🔒 AES and ECC based password encryption.
+- 🔒 AES-256 and ECC-256 based password encryption.
 - 📄 Custom `eccidian-view` that shows a locked message instead of the default editor.
 - 🧷 Files remain read-only until unlocked via user input.
 - ⚙️ UI and control panel support.
