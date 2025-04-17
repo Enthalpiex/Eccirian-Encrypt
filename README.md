@@ -35,14 +35,14 @@ It introduces a custom `.eccidian` file extension and provides a unique read-onl
 
 ##  Installation
 
-### (Under review) Official Community Release
+### Method 1. (Under review) Official Community Release
 
 To be published to the Obsidian Community Plugin Marketplace.
 
 You can clone the current repository to try it out first, but please do not update before the official release - the encryption logic may **change**.
 
 
-###  Release File
+###  Method 2. Release File
 
 1. **Download & extract** this release.
 2. Move the files into your Obsidian vault's plugin directory:
