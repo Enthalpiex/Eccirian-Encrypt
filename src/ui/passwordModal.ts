@@ -135,6 +135,11 @@ export class PasswordModal extends Modal {
       }
     }
 
+    if (!this.isDecrypt && this.encryptionMode === "permanent") {
+      new Notice("Permanent encryption is not implemented yet");
+      return;
+    }
+
     this.isSubmitted = true;
     this.close();
     this.onSuccess(this.password, this.encryptionMethod);

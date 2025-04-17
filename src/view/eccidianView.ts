@@ -153,12 +153,17 @@ export class EccidianView extends FileView {
           const saltMatch = content.match(/SALT:(.+)/);
           const ivMatch = content.match(/IV:(.+)/);
           const dataMatch = content.match(/DATA:(.+)/);
+          const typeMatch = content.match(/TYPE:(.+)/);
 
-          if (!saltMatch || !ivMatch || !dataMatch) {
+          if (!saltMatch || !ivMatch || !dataMatch || !typeMatch) {
             await changeFileExtension(this.app.vault, mdFile, "eccidian");
             new Notice("Decryption failed: Invalid file format");
             return;
           }
+
+          const encryptionType = typeMatch[1];
+          this.plugin.settings.defaultEncryptionMode = encryptionType as "temporary" | "permanent";
+          await this.plugin.saveSettings();
 
           new PasswordModal(
             this.app, 

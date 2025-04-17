@@ -9,6 +9,7 @@ import { EccidianView, ECCIDIAN_VIEW_TYPE } from "./view/eccidianView";
 
 export default class EccEncryptPlugin extends Plugin {
   settings: EccEncryptSettings;
+  private toggleExtensionButton: HTMLElement | null = null;
 
   async onload() {
     await this.loadSettings();
@@ -76,7 +77,7 @@ export default class EccEncryptPlugin extends Plugin {
               } else {
                 if (encryptionMethod === "AES") {
                   const { salt, iv, data } = await encryptWithPassword(password, fileContent);
-                  const encrypted = `%%ENC\nSALT:${salt}\nIV:${iv}\nDATA:${data}`;
+                  const encrypted = `%%ENC\nTYPE:${this.settings.defaultEncryptionMode}\nSALT:${salt}\nIV:${iv}\nDATA:${data}`;
                   await this.app.vault.modify(activeFile, encrypted);
                   const eccFile = await changeFileExtension(this.app.vault, activeFile, "eccidian");
                   new Notice("File encrypted");
@@ -84,7 +85,7 @@ export default class EccEncryptPlugin extends Plugin {
                   await leaf.openFile(eccFile);
                 } else {
                   const { salt, iv, data, publicKey } = await eccEncrypt(password, fileContent);
-                  const encrypted = `%%ENC\nSALT:${salt}\nIV:${iv}\nDATA:${data}\nPUBLIC_KEY:${publicKey}`;
+                  const encrypted = `%%ENC\nTYPE:${this.settings.defaultEncryptionMode}\nSALT:${salt}\nIV:${iv}\nDATA:${data}\nPUBLIC_KEY:${publicKey}`;
                   await this.app.vault.modify(activeFile, encrypted);
                   const eccFile = await changeFileExtension(this.app.vault, activeFile, "eccidian");
                   new Notice("File encrypted");
@@ -146,7 +147,7 @@ export default class EccEncryptPlugin extends Plugin {
             } else {
               if (this.settings.encryptionMethod === "AES") {
                 const { salt, iv, data } = await encryptWithPassword(password, fileContent);
-                const encrypted = `%%ENC\nSALT:${salt}\nIV:${iv}\nDATA:${data}`;
+                const encrypted = `%%ENC\nTYPE:${this.settings.defaultEncryptionMode}\nSALT:${salt}\nIV:${iv}\nDATA:${data}`;
                 await this.app.vault.modify(activeFile, encrypted);
                 const eccFile = await changeFileExtension(this.app.vault, activeFile, "eccidian");
                 new Notice("File encrypted");
@@ -167,6 +168,9 @@ export default class EccEncryptPlugin extends Plugin {
         fileContent.includes("%%ENC")
       ).open();
     });
+
+    // 添加文件扩展名转换按钮
+    this.updateToggleExtensionButton();
 
     this.registerView(
       ECCIDIAN_VIEW_TYPE,
@@ -213,6 +217,43 @@ export default class EccEncryptPlugin extends Plugin {
     this.registerDomEvent(document, "DOMContentLoaded", () => {
       this.loadStyles();
     });
+  }
+
+  private updateToggleExtensionButton() {
+    if (this.toggleExtensionButton) {
+      this.toggleExtensionButton.remove();
+      this.toggleExtensionButton = null;
+    }
+
+    if (this.settings.showToggleExtensionButton) {
+      this.toggleExtensionButton = this.addRibbonIcon("file-text", "Toggle File Extension", async () => {
+        const activeFile = this.app.workspace.getActiveFile();
+        if (!activeFile) {
+          return;
+        }
+
+        try {
+          if (activeFile.extension === "eccidian") {
+            const mdFile = await changeFileExtension(this.app.vault, activeFile, "md");
+            const leaf = this.app.workspace.getLeaf();
+            await leaf.openFile(mdFile);
+          } else if (activeFile.extension === "md") {
+            const eccFile = await changeFileExtension(this.app.vault, activeFile, "eccidian");
+            const leaf = this.app.workspace.getLeaf();
+            await leaf.openFile(eccFile);
+          }
+        } catch (err) {
+          // 静默失败
+        }
+      });
+    }
+  }
+
+  async onunload() {
+    if (this.toggleExtensionButton) {
+      this.toggleExtensionButton.remove();
+      this.toggleExtensionButton = null;
+    }
   }
 
   async switchToMarkdownView(file: TFile) {
