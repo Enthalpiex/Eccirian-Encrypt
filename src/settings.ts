@@ -4,6 +4,8 @@ export interface EccEncryptSettings {
     iconStyle: "lock" | "shield" | "key" | "padlock";
     requirePasswordConfirmation: boolean;
     showToggleExtensionButton: boolean;
+    showNotice: boolean;
+    showHint: boolean;
   }
   
   export const DEFAULT_SETTINGS: EccEncryptSettings = {
@@ -11,6 +13,8 @@ export interface EccEncryptSettings {
     defaultEncryptionMode: "temporary",
     iconStyle: "lock",
     requirePasswordConfirmation: false,
-    showToggleExtensionButton: false
+    showToggleExtensionButton: false,
+    showNotice: true,
+    showHint: true
   };
   

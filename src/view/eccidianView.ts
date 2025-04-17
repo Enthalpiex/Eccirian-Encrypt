@@ -154,14 +154,16 @@ export class EccidianView extends FileView {
           const ivMatch = content.match(/IV:(.+)/);
           const dataMatch = content.match(/DATA:(.+)/);
           const typeMatch = content.match(/TYPE:(.+)/);
+          const originalExtMatch = content.match(/ORIGINAL_EXT:(.+)/);
 
-          if (!saltMatch || !ivMatch || !dataMatch || !typeMatch) {
+          if (!saltMatch || !ivMatch || !dataMatch || !typeMatch || !originalExtMatch) {
             await changeFileExtension(this.app.vault, mdFile, "eccidian");
             new Notice("Decryption failed: Invalid file format");
             return;
           }
 
           const encryptionType = typeMatch[1];
+          const originalExt = originalExtMatch[1];
           this.plugin.settings.defaultEncryptionMode = encryptionType as "temporary" | "permanent";
           await this.plugin.saveSettings();
 
@@ -188,7 +190,8 @@ export class EccidianView extends FileView {
                   new Notice("File decrypted");
 
                   const leaf = this.app.workspace.getLeaf();
-                  await leaf.openFile(mdFile, { state: { mode: "source" } });
+                  const originalFile = await changeFileExtension(this.app.vault, mdFile, originalExt);
+                  await leaf.openFile(originalFile, { state: { mode: "source" } });
                 } catch (err) {
                   const leaf = this.app.workspace.getLeaf();
                   await leaf.openFile(mdFile, { state: { mode: "source" } });

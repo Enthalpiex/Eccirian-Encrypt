@@ -2,19 +2,30 @@
 
 # ⚠️WARNING
 
-This plugin is in the early access stage, and the encryption algorithm may change.
-Please **DO NOT** update the version at will before the stable version is released.
+> This plugin is in the early access stage, and the encryption algorithm may change.
+
+> Please DO NOT update the version at will before the stable version is released.
+
 
 # Eccidian Encrypt – Encrypted Files for Obsidian
 
-**Eccidian** is a security-focused Obsidian encryption plugin that supports seamless encryption and decryption of files using multiple advanced password-based encryption methods. It introduces a custom `.eccidian` file extension and provides a unique read-only view for locked files, allowing you to easily manage sensitive information directly in Obsidian.
+**Eccidian** is a security-focused Obsidian encryption plugin that supports seamless encryption and decryption of files using multiple advanced password-based encryption methods. 
+
+It introduces a custom `.eccidian` file extension and provides a unique read-only view for locked files, allowing you to easily manage sensitive information directly in Obsidian.
+
+
+[![Stars](https://img.shields.io/github/stars/Enthalpiex/Eccidian-Encrypt?style=social)](https://github.com/Enthalpiex/Eccidian-Encrypt/stargazers)
+[![Release](https://img.shields.io/github/v/release/Enthalpiex/Eccidian-Encrypt?include_prereleases&label=release)](https://github.com/Enthalpiex/Eccidian-Encrypt/releases)
+[![Issues](https://img.shields.io/github/issues/Enthalpiex/Eccidian-Encrypt)](https://github.com/Enthalpiex/Eccidian-Encrypt/issues)
+[![License](https://img.shields.io/github/license/Enthalpiex/Eccidian-Encrypt)](https://github.com/Enthalpiex/Eccidian-Encrypt/blob/main/LICENSE)
+[![Last Commit](https://img.shields.io/github/last-commit/Enthalpiex/Eccidian-Encrypt)](https://github.com/Enthalpiex/Eccidian-Encrypt/commits/main)
 
 ---
 
 ##  Features
 
 - 🔁 One-click encryption and decryption of `.md` files (or any other types) into `.eccidian`, and vice versa.
-- 🔒 AES and ECC based password encryption.
+- 🔒 AES-256 and ECC-256 based password encryption.
 - 📄 Custom `eccidian-view` that shows a locked message instead of the default editor.
 - 🧷 Files remain read-only until unlocked via user input.
 - ⚙️ UI and control panel support.
@@ -24,11 +35,25 @@ Please **DO NOT** update the version at will before the stable version is releas
 
 ##  Installation
 
-### (Planned) Official Community Release
+### Method 1. (Under review) Official Community Release
 
 To be published to the Obsidian Community Plugin Marketplace.
 
 You can clone the current repository to try it out first, but please do not update before the official release - the encryption logic may **change**.
+
+
+###  Method 2. Release File
+
+1. **Download & extract** the release.
+2. Move the files into your Obsidian vault's plugin directory:
+
+```
+<your-vault>/.obsidian/plugins/eccidian-encrypt/
+```
+
+3. Open Obsidian:
+   - Go to **Settings → Community Plugins**.
+   - Enable **Eccidian Encrypt** from the list.
 
 ---
 

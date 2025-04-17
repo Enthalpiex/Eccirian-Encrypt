@@ -19,3 +19,16 @@
     cursor: pointer;
   }
   
+.eccidian-logo-container {
+    text-align: center;
+    margin-bottom: 2rem;
+    cursor: pointer;
+    width: 100%;
+}
+
+.eccidian-logo {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+  

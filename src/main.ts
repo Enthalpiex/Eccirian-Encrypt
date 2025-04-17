@@ -16,7 +16,7 @@ export default class EccEncryptPlugin extends Plugin {
 
     this.addCommand({
       id: "encrypt-decrypt",
-      name: "Eccidian: Encrypt/Decrypt",
+      name: "Eccidian: Toggle between .md and .eccidian",
       callback: async () => {
         const activeFile = this.app.workspace.getActiveFile();
         if (!activeFile) {
@@ -24,86 +24,21 @@ export default class EccEncryptPlugin extends Plugin {
           return;
         }
 
-        const fileContent = await this.app.vault.read(activeFile);
-        
-        new PasswordModal(
-          this.app,
-          async (password, encryptionMethod) => {
-            try {
-              if (fileContent.includes("%%ENC")) {
-                if (encryptionMethod === "AES") {
-                  const saltMatch = fileContent.match(/SALT:(.+)/);
-                  const ivMatch = fileContent.match(/IV:(.+)/);
-                  const dataMatch = fileContent.match(/DATA:(.+)/);
-
-                  if (saltMatch && ivMatch && dataMatch) {
-                    const decrypted = await decryptWithPassword(
-                      password,
-                      saltMatch[1],
-                      ivMatch[1],
-                      dataMatch[1]
-                    );
-                    await this.app.vault.modify(activeFile, decrypted);
-                    const mdFile = await changeFileExtension(this.app.vault, activeFile, "md");
-                    new Notice("File decrypted");
-                    const leaf = this.app.workspace.getLeaf();
-                    await leaf.openFile(mdFile);
-                  } else {
-                    new Notice("Decryption failed: Invalid file format");
-                  }
-                } else {
-                  const saltMatch = fileContent.match(/SALT:(.+)/);
-                  const ivMatch = fileContent.match(/IV:(.+)/);
-                  const dataMatch = fileContent.match(/DATA:(.+)/);
-                  const publicKeyMatch = fileContent.match(/PUBLIC_KEY:(.+)/);
-
-                  if (saltMatch && ivMatch && dataMatch && publicKeyMatch) {
-                    const decrypted = await eccDecrypt(
-                      password,
-                      saltMatch[1],
-                      ivMatch[1],
-                      dataMatch[1],
-                      publicKeyMatch[1]
-                    );
-                    await this.app.vault.modify(activeFile, decrypted);
-                    const mdFile = await changeFileExtension(this.app.vault, activeFile, "md");
-                    new Notice("File decrypted");
-                    const leaf = this.app.workspace.getLeaf();
-                    await leaf.openFile(mdFile);
-                  } else {
-                    new Notice("Decryption failed: Invalid file format");
-                  }
-                }
-              } else {
-                if (encryptionMethod === "AES") {
-                  const { salt, iv, data } = await encryptWithPassword(password, fileContent);
-                  const encrypted = `%%ENC\nTYPE:${this.settings.defaultEncryptionMode}\nSALT:${salt}\nIV:${iv}\nDATA:${data}`;
-                  await this.app.vault.modify(activeFile, encrypted);
-                  const eccFile = await changeFileExtension(this.app.vault, activeFile, "eccidian");
-                  new Notice("File encrypted");
-                  const leaf = this.app.workspace.getLeaf();
-                  await leaf.openFile(eccFile);
-                } else {
-                  const { salt, iv, data, publicKey } = await eccEncrypt(password, fileContent);
-                  const encrypted = `%%ENC\nTYPE:${this.settings.defaultEncryptionMode}\nSALT:${salt}\nIV:${iv}\nDATA:${data}\nPUBLIC_KEY:${publicKey}`;
-                  await this.app.vault.modify(activeFile, encrypted);
-                  const eccFile = await changeFileExtension(this.app.vault, activeFile, "eccidian");
-                  new Notice("File encrypted");
-                  const leaf = this.app.workspace.getLeaf();
-                  await leaf.openFile(eccFile);
-                }
-              }
-            } catch (err) {
-              if (err instanceof Error && err.message.includes("密码错误")) {
-                new Notice("Operation failed: Password may be incorrect");
-              }
-            }
-          },
-          () => {},
-          this.settings.defaultEncryptionMode,
-          fileContent.includes("%%ENC"),
-          this.settings.requirePasswordConfirmation
-        ).open();
+        try {
+          if (activeFile.extension === "eccidian") {
+            const mdFile = await changeFileExtension(this.app.vault, activeFile, "md");
+            const leaf = this.app.workspace.getLeaf();
+            await leaf.openFile(mdFile);
+          } else if (activeFile.extension === "md") {
+            const eccFile = await changeFileExtension(this.app.vault, activeFile, "eccidian");
+            const leaf = this.app.workspace.getLeaf();
+            await leaf.openFile(eccFile);
+          } else {
+            new Notice("Only .md files can be converted to .eccidian");
+          }
+        } catch (err) {
+          // 静默失败
+        }
       }
     });
 
@@ -147,14 +82,24 @@ export default class EccEncryptPlugin extends Plugin {
             } else {
               if (this.settings.encryptionMethod === "AES") {
                 const { salt, iv, data } = await encryptWithPassword(password, fileContent);
-                const encrypted = `%%ENC\nTYPE:${this.settings.defaultEncryptionMode}\nSALT:${salt}\nIV:${iv}\nDATA:${data}`;
-                await this.app.vault.modify(activeFile, encrypted);
+                const encrypted = `%%ENC\nTYPE:${this.settings.defaultEncryptionMode}\nORIGINAL_EXT:${activeFile.extension}\nSALT:${salt}\nIV:${iv}\nDATA:${data}`;
                 const eccFile = await changeFileExtension(this.app.vault, activeFile, "eccidian");
-                new Notice("File encrypted");
+                await this.app.vault.modify(eccFile, encrypted);
+                if (this.settings.showNotice) {
+                  new Notice("File encrypted");
+                }
                 const leaf = this.app.workspace.getLeaf();
                 await leaf.openFile(eccFile);
               } else {
-                new Notice("ECC encryption not implemented");
+                const { salt, iv, data, publicKey } = await eccEncrypt(password, fileContent);
+                const encrypted = `%%ENC\nTYPE:${this.settings.defaultEncryptionMode}\nORIGINAL_EXT:${activeFile.extension}\nSALT:${salt}\nIV:${iv}\nDATA:${data}\nPUBLIC_KEY:${publicKey}`;
+                const eccFile = await changeFileExtension(this.app.vault, activeFile, "eccidian");
+                await this.app.vault.modify(eccFile, encrypted);
+                if (this.settings.showNotice) {
+                  new Notice("File encrypted");
+                }
+                const leaf = this.app.workspace.getLeaf();
+                await leaf.openFile(eccFile);
               }
             }
           } catch (err) {
@@ -165,7 +110,9 @@ export default class EccEncryptPlugin extends Plugin {
         },
         () => {},
         this.settings.defaultEncryptionMode,
-        fileContent.includes("%%ENC")
+        fileContent.includes("%%ENC"),
+        this.settings.requirePasswordConfirmation,
+        this.settings.showHint
       ).open();
     });
 
@@ -217,6 +164,113 @@ export default class EccEncryptPlugin extends Plugin {
     this.registerDomEvent(document, "DOMContentLoaded", () => {
       this.loadStyles();
     });
+
+    this.addCommand({
+      id: "encrypt-decrypt-file",
+      name: "Encrypt/Decrypt file",
+      callback: async () => {
+        const activeFile = this.app.workspace.getActiveFile();
+        if (!activeFile) {
+          new Notice("Please open a file first");
+          return;
+        }
+
+        const fileContent = await this.app.vault.read(activeFile);
+        const isEncrypted = fileContent.includes("%%ENC");
+
+        if (isEncrypted) {
+          // 解密逻辑
+          const hintMatch = fileContent.match(/HINT:(.+)/);
+          const hint = hintMatch ? hintMatch[1] : undefined;
+
+          new PasswordModal(
+            this.app,
+            async (password) => {
+              try {
+                if (this.settings.encryptionMethod === "AES") {
+                  const saltMatch = fileContent.match(/SALT:(.+)/);
+                  const ivMatch = fileContent.match(/IV:(.+)/);
+                  const dataMatch = fileContent.match(/DATA:(.+)/);
+
+                  if (saltMatch && ivMatch && dataMatch) {
+                    const decrypted = await decryptWithPassword(
+                      password,
+                      saltMatch[1],
+                      ivMatch[1],
+                      dataMatch[1]
+                    );
+                    await this.app.vault.modify(activeFile, decrypted);
+                    const mdFile = await changeFileExtension(this.app.vault, activeFile, "md");
+                    if (this.settings.showNotice) {
+                      new Notice("File decrypted");
+                    }
+                    const leaf = this.app.workspace.getLeaf();
+                    await leaf.openFile(mdFile);
+                  } else {
+                    new Notice("Decryption failed: Invalid file format");
+                  }
+                } else {
+                  new Notice("ECC decryption not implemented");
+                }
+              } catch (err) {
+                if (err instanceof Error && err.message.includes("密码错误")) {
+                  new Notice("Operation failed: Password may be incorrect");
+                }
+              }
+            },
+            () => {},
+            this.settings.defaultEncryptionMode,
+            true,
+            this.settings.requirePasswordConfirmation,
+            this.settings.showHint
+          ).open();
+
+          if (hint) {
+            new Notice(`Password Hint: ${hint}`);
+          }
+        } else {
+          // 加密逻辑
+          new PasswordModal(
+            this.app,
+            async (password, encryptionMethod, hint) => {
+              try {
+                if (encryptionMethod === "AES") {
+                  const { salt, iv, data } = await encryptWithPassword(password, fileContent);
+                  const encrypted = `%%ENC\nTYPE:${this.settings.defaultEncryptionMode}\nORIGINAL_EXT:${activeFile.extension}\nSALT:${salt}\nIV:${iv}\nDATA:${data}${hint ? `\nHINT:${hint}` : ''}`;
+                  const eccFile = await changeFileExtension(this.app.vault, activeFile, "eccidian");
+                  await this.app.vault.modify(eccFile, encrypted);
+                  if (this.settings.showNotice) {
+                    new Notice("File encrypted");
+                  }
+                  const leaf = this.app.workspace.getLeaf();
+                  await leaf.openFile(eccFile);
+                } else {
+                  const { salt, iv, data, publicKey } = await eccEncrypt(password, fileContent);
+                  const encrypted = `%%ENC\nTYPE:${this.settings.defaultEncryptionMode}\nORIGINAL_EXT:${activeFile.extension}\nSALT:${salt}\nIV:${iv}\nDATA:${data}\nPUBLIC_KEY:${publicKey}${hint ? `\nHINT:${hint}` : ''}`;
+                  const eccFile = await changeFileExtension(this.app.vault, activeFile, "eccidian");
+                  await this.app.vault.modify(eccFile, encrypted);
+                  if (this.settings.showNotice) {
+                    new Notice("File encrypted");
+                  }
+                  const leaf = this.app.workspace.getLeaf();
+                  await leaf.openFile(eccFile);
+                }
+              } catch (err) {
+                if (err instanceof Error && err.message.includes("密码错误")) {
+                  new Notice("Operation failed: Password may be incorrect");
+                }
+              }
+            },
+            () => {},
+            this.settings.defaultEncryptionMode,
+            false,
+            this.settings.requirePasswordConfirmation,
+            this.settings.showHint,
+            this.settings.encryptionMethod
+          ).open();
+        }
+      }
+    });
   }
 
   private updateToggleExtensionButton() {
@@ -241,6 +295,8 @@ export default class EccEncryptPlugin extends Plugin {
             const eccFile = await changeFileExtension(this.app.vault, activeFile, "eccidian");
             const leaf = this.app.workspace.getLeaf();
             await leaf.openFile(eccFile);
+          } else {
+            new Notice("Only .md files can be converted to .eccidian");
           }
         } catch (err) {
           // 静默失败

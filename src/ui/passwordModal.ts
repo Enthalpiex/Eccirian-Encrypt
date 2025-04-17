@@ -3,21 +3,25 @@ import { App, Modal, Setting, Notice } from "obsidian";
 export class PasswordModal extends Modal {
   password: string = "";
   confirmPassword: string = "";
-  onSuccess: (password: string, encryptionMethod: "AES" | "ECC") => void;
+  hint: string = "";
+  onSuccess: (password: string, encryptionMethod: "AES" | "ECC", hint?: string) => void;
   onCancel: () => void;
   encryptionMode: "temporary" | "permanent" = "temporary";
   encryptionMethod: "AES" | "ECC" = "AES";
   private isSubmitted: boolean = false;
   private isDecrypt: boolean = false;
   private requirePasswordConfirmation: boolean = false;
+  private showHint: boolean = false;
 
   constructor(
     app: App,
-    onSuccess: (password: string, encryptionMethod: "AES" | "ECC") => void,
+    onSuccess: (password: string, encryptionMethod: "AES" | "ECC", hint?: string) => void,
     onCancel: () => void,
     defaultMode: "temporary" | "permanent" = "temporary",
     isDecrypt: boolean = false,
-    requirePasswordConfirmation: boolean = false
+    requirePasswordConfirmation: boolean = false,
+    showHint: boolean = false,
+    defaultEncryptionMethod: "AES" | "ECC" = "AES"
   ) {
     super(app);
     this.onSuccess = onSuccess;
@@ -25,6 +29,8 @@ export class PasswordModal extends Modal {
     this.encryptionMode = defaultMode;
     this.isDecrypt = isDecrypt;
     this.requirePasswordConfirmation = requirePasswordConfirmation;
+    this.showHint = showHint;
+    this.encryptionMethod = defaultEncryptionMethod;
   }
 
   onOpen() {
@@ -40,7 +46,7 @@ export class PasswordModal extends Modal {
         .addDropdown(drop =>
           drop
             .addOption("AES", "AES-256 (Symmetric)")
-            .addOption("ECC", "ECC (Asymmetric)")
+            .addOption("ECC", "ECC+AES (Asymmetric)")
             .setValue(this.encryptionMethod)
             .onChange(value => {
               this.encryptionMethod = value as "AES" | "ECC";
@@ -99,6 +105,20 @@ export class PasswordModal extends Modal {
         });
     }
 
+    if (!this.isDecrypt && this.showHint) {
+      new Setting(contentEl)
+        .setName("Password Hint")
+        .setDesc("Optional hint to help remember the password")
+        .addText(text => {
+          text
+            .setPlaceholder("Enter password hint (optional)")
+            .setValue(this.hint)
+            .onChange(value => {
+              this.hint = value;
+            });
+        });
+    }
+
     new Setting(contentEl)
       .addButton(button => {
         button
@@ -142,7 +162,7 @@ export class PasswordModal extends Modal {
 
     this.isSubmitted = true;
     this.close();
-    this.onSuccess(this.password, this.encryptionMethod);
+    this.onSuccess(this.password, this.encryptionMethod, this.hint);
   }
 
   onClose() {
