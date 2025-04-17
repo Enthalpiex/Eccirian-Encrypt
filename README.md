@@ -5,6 +5,14 @@
 This plugin is in the early access stage, and the encryption algorithm may change.
 Please **DO NOT** update the version at will before the stable version is released.
 
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/Enthalpiex/Eccidion-plugin)
+![GitHub all releases](https://img.shields.io/github/downloads/Enthalpiex/Eccidion-plugin/total)
+![GitHub issues](https://img.shields.io/github/issues/Enthalpiex/Eccidion-plugin)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/Enthalpiex/Eccidion-plugin)
+![GitHub last commit](https://img.shields.io/github/last-commit/Enthalpiex/Eccidion-plugin)
+![GitHub license](https://img.shields.io/github/license/Enthalpiex/Eccidion-plugin)
+
+
 # Eccidian Encrypt – Encrypted Files for Obsidian
 
 **Eccidian** is a security-focused Obsidian encryption plugin that supports seamless encryption and decryption of files using multiple advanced password-based encryption methods. It introduces a custom `.eccidian` file extension and provides a unique read-only view for locked files, allowing you to easily manage sensitive information directly in Obsidian.
