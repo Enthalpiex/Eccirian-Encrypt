@@ -5,12 +5,14 @@
 This plugin is in the early access stage, and the encryption algorithm may change.
 Please **DO NOT** update the version at will before the stable version is released.
 
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/Enthalpiex/Eccidion-plugin)
-![GitHub all releases](https://img.shields.io/github/downloads/Enthalpiex/Eccidion-plugin/total)
-![GitHub issues](https://img.shields.io/github/issues/Enthalpiex/Eccidion-plugin)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/Enthalpiex/Eccidion-plugin)
-![GitHub last commit](https://img.shields.io/github/last-commit/Enthalpiex/Eccidion-plugin)
-![GitHub license](https://img.shields.io/github/license/Enthalpiex/Eccidion-plugin)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/Enthalpiex/Eccidion-Encrypt)
+![GitHub all releases](https://img.shields.io/github/downloads/Enthalpiex/Eccidion-Encrypt/total)
+![GitHub issues](https://img.shields.io/github/issues/Enthalpiex/Eccidion-Encrypt)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/Enthalpiex/Eccidion-Encrypt)
+![GitHub last commit](https://img.shields.io/github/last-commit/Enthalpiex/Eccidion-Encrypt)
+![GitHub license](https://img.shields.io/github/license/Enthalpiex/Eccidion-Encrypt)
+![GitHub stars](https://img.shields.io/github/stars/Enthalpiex/Eccidion-Encrypt?style=social)
+
 
 
 # Eccidian Encrypt – Encrypted Files for Obsidian
