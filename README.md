@@ -2,8 +2,8 @@
 
 # ⚠️WARNING
 
-	This plugin is in the early access stage, and the encryption algorithm may change.
-	Please DO NOT update the version at will before the stable version is released.
+> This plugin is in the early access stage, and the encryption algorithm may change.
+> Please DO NOT update the version at will before the stable version is released.
 
 
 # Eccidian Encrypt – Encrypted Files for Obsidian
