@@ -2,18 +2,19 @@
 
 # ⚠️WARNING
 
-This plugin is in the early access stage, and the encryption algorithm may change.
-Please **DO NOT** update the version at will before the stable version is released.
+	This plugin is in the early access stage, and the encryption algorithm may change.
+	Please **DO NOT** update the version at will before the stable version is released.
+
+
+# Eccidian Encrypt – Encrypted Files for Obsidian
+
+**Eccidian** is a security-focused Obsidian encryption plugin that supports seamless encryption and decryption of files using multiple advanced password-based encryption methods. It introduces a custom `.eccidian` file extension and provides a unique read-only view for locked files, allowing you to easily manage sensitive information directly in Obsidian.
 
 [![Stars](https://img.shields.io/github/stars/Enthalpiex/Eccidian-Encrypt?style=social)](https://github.com/Enthalpiex/Eccidian-Encrypt/stargazers)
 [![Release](https://img.shields.io/github/v/release/Enthalpiex/Eccidian-Encrypt?include_prereleases&label=release)](https://github.com/Enthalpiex/Eccidian-Encrypt/releases)
 [![Issues](https://img.shields.io/github/issues/Enthalpiex/Eccidian-Encrypt)](https://github.com/Enthalpiex/Eccidian-Encrypt/issues)
 [![License](https://img.shields.io/github/license/Enthalpiex/Eccidian-Encrypt)](https://github.com/Enthalpiex/Eccidian-Encrypt/blob/main/LICENSE)
 [![Last Commit](https://img.shields.io/github/last-commit/Enthalpiex/Eccidian-Encrypt)](https://github.com/Enthalpiex/Eccidian-Encrypt/commits/main)
-
-# Eccidian Encrypt – Encrypted Files for Obsidian
-
-**Eccidian** is a security-focused Obsidian encryption plugin that supports seamless encryption and decryption of files using multiple advanced password-based encryption methods. It introduces a custom `.eccidian` file extension and provides a unique read-only view for locked files, allowing you to easily manage sensitive information directly in Obsidian.
 
 ---
 
