@@ -35,11 +35,25 @@ It introduces a custom `.eccidian` file extension and provides a unique read-onl
 
 ##  Installation
 
-### (Planned) Official Community Release
+### (Under review) Official Community Release
 
 To be published to the Obsidian Community Plugin Marketplace.
 
 You can clone the current repository to try it out first, but please do not update before the official release - the encryption logic may **change**.
+
+
+###  Release File
+
+1. **Download & extract** this release.
+2. Move the files into your Obsidian vault's plugin directory:
+
+```
+<your-vault>/.obsidian/plugins/eccidian-encrypt/
+```
+
+3. Open Obsidian:
+   - Go to **Settings → Community Plugins**.
+   - Enable **Eccidian Encrypt** from the list.
 
 ---
 
