@@ -44,7 +44,7 @@ You can clone the current repository to try it out first, but please do not upda
 
 ###  Method 2. Release File
 
-1. **Download & extract** this release.
+1. **Download & extract** the release.
 2. Move the files into your Obsidian vault's plugin directory:
 
 ```
