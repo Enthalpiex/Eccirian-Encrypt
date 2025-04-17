@@ -20,7 +20,9 @@ export default class EccEncryptPlugin extends Plugin {
       callback: async () => {
         const activeFile = this.app.workspace.getActiveFile();
         if (!activeFile) {
-          new Notice("Please open a file first");
+          if (this.settings.showNotice) {
+            new Notice("Please open a file first");
+          }
           return;
         }
 
@@ -34,7 +36,9 @@ export default class EccEncryptPlugin extends Plugin {
             const leaf = this.app.workspace.getLeaf();
             await leaf.openFile(eccFile);
           } else {
-            new Notice("Only .md files can be converted to .eccidian");
+            if (this.settings.showNotice) {
+              new Notice("Only .md files can be converted to .eccidian");
+            }
           }
         } catch (err) {
           // 静默失败
@@ -45,7 +49,9 @@ export default class EccEncryptPlugin extends Plugin {
     this.addRibbonIcon(this.settings.iconStyle, "Encrypt/Decrypt Current File", async () => {
       const activeFile = this.app.workspace.getActiveFile();
       if (!activeFile) {
-        new Notice("Please open a file first");
+        if (this.settings.showNotice) {
+          new Notice("Please open a file first");
+        }
         return;
       }
 
@@ -70,14 +76,20 @@ export default class EccEncryptPlugin extends Plugin {
                   );
                   await this.app.vault.modify(activeFile, decrypted);
                   const mdFile = await changeFileExtension(this.app.vault, activeFile, "md");
-                  new Notice("File decrypted");
+                  if (this.settings.showNotice) {
+                    new Notice("File decrypted");
+                  }
                   const leaf = this.app.workspace.getLeaf();
                   await leaf.openFile(mdFile);
                 } else {
-                  new Notice("Decryption failed: Invalid file format");
+                  if (this.settings.showNotice) {
+                    new Notice("Decryption failed: Invalid file format");
+                  }
                 }
               } else {
-                new Notice("ECC decryption not implemented");
+                if (this.settings.showNotice) {
+                  new Notice("ECC decryption not implemented");
+                }
               }
             } else {
               if (this.settings.encryptionMethod === "AES") {
@@ -104,7 +116,9 @@ export default class EccEncryptPlugin extends Plugin {
             }
           } catch (err) {
             if (err instanceof Error && err.message.includes("密码错误")) {
-              new Notice("Operation failed: Password may be incorrect");
+              if (this.settings.showNotice) {
+                new Notice("Operation failed: Password may be incorrect");
+              }
             }
           }
         },
@@ -112,7 +126,9 @@ export default class EccEncryptPlugin extends Plugin {
         this.settings.defaultEncryptionMode,
         fileContent.includes("%%ENC"),
         this.settings.requirePasswordConfirmation,
-        this.settings.showHint
+        this.settings.showHint,
+        this.settings.encryptionMethod,
+        this
       ).open();
     });
 
@@ -171,7 +187,9 @@ export default class EccEncryptPlugin extends Plugin {
       callback: async () => {
         const activeFile = this.app.workspace.getActiveFile();
         if (!activeFile) {
-          new Notice("Please open a file first");
+          if (this.settings.showNotice) {
+            new Notice("Please open a file first");
+          }
           return;
         }
 
@@ -207,14 +225,20 @@ export default class EccEncryptPlugin extends Plugin {
                     const leaf = this.app.workspace.getLeaf();
                     await leaf.openFile(mdFile);
                   } else {
-                    new Notice("Decryption failed: Invalid file format");
+                    if (this.settings.showNotice) {
+                      new Notice("Decryption failed: Invalid file format");
+                    }
                   }
                 } else {
-                  new Notice("ECC decryption not implemented");
+                  if (this.settings.showNotice) {
+                    new Notice("ECC decryption not implemented");
+                  }
                 }
               } catch (err) {
                 if (err instanceof Error && err.message.includes("密码错误")) {
-                  new Notice("Operation failed: Password may be incorrect");
+                  if (this.settings.showNotice) {
+                    new Notice("Operation failed: Password may be incorrect");
+                  }
                 }
               }
             },
@@ -222,10 +246,12 @@ export default class EccEncryptPlugin extends Plugin {
             this.settings.defaultEncryptionMode,
             true,
             this.settings.requirePasswordConfirmation,
-            this.settings.showHint
+            this.settings.showHint,
+            this.settings.encryptionMethod,
+            this
           ).open();
 
-          if (hint) {
+          if (hint && this.settings.showNotice) {
             new Notice(`Password Hint: ${hint}`);
           }
         } else {
@@ -257,7 +283,9 @@ export default class EccEncryptPlugin extends Plugin {
                 }
               } catch (err) {
                 if (err instanceof Error && err.message.includes("密码错误")) {
-                  new Notice("Operation failed: Password may be incorrect");
+                  if (this.settings.showNotice) {
+                    new Notice("Operation failed: Password may be incorrect");
+                  }
                 }
               }
             },
@@ -266,7 +294,8 @@ export default class EccEncryptPlugin extends Plugin {
             false,
             this.settings.requirePasswordConfirmation,
             this.settings.showHint,
-            this.settings.encryptionMethod
+            this.settings.encryptionMethod,
+            this
           ).open();
         }
       }

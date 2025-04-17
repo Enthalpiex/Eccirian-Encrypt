@@ -28,8 +28,11 @@ export async function changeFileExtension(vault: Vault, file: TFile, newExt: str
   const result = await vault.rename(file, newPath);
   console.log("Rename result:", result);
   
-  const newFile = vault.getAbstractFileByPath(newPath) as TFile;
-  console.log("New file reference:", newFile);
+  const newFile = vault.getAbstractFileByPath(newPath);
+  if (!(newFile instanceof TFile)) {
+    throw new Error(`Expected a file at path ${newPath} but got a folder or null`);
+  }
   
+  console.log("New file reference:", newFile);
   return newFile;
 }

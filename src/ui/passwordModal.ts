@@ -12,6 +12,7 @@ export class PasswordModal extends Modal {
   private isDecrypt: boolean = false;
   private requirePasswordConfirmation: boolean = false;
   private showHint: boolean = false;
+  private plugin: any;
 
   constructor(
     app: App,
@@ -21,7 +22,8 @@ export class PasswordModal extends Modal {
     isDecrypt: boolean = false,
     requirePasswordConfirmation: boolean = false,
     showHint: boolean = false,
-    defaultEncryptionMethod: "AES" | "ECC" = "AES"
+    defaultEncryptionMethod: "AES" | "ECC" = "AES",
+    plugin: any
   ) {
     super(app);
     this.onSuccess = onSuccess;
@@ -31,6 +33,7 @@ export class PasswordModal extends Modal {
     this.requirePasswordConfirmation = requirePasswordConfirmation;
     this.showHint = showHint;
     this.encryptionMethod = defaultEncryptionMethod;
+    this.plugin = plugin;
   }
 
   onOpen() {
@@ -140,23 +143,31 @@ export class PasswordModal extends Modal {
 
   private submit() {
     if (!this.password) {
-      new Notice("Please enter a password");
+      if (this.plugin.settings.showNotice) {
+        new Notice("Please enter a password");
+      }
       return;
     }
 
     if (!this.isDecrypt && this.requirePasswordConfirmation) {
       if (!this.confirmPassword) {
-        new Notice("Please confirm your password");
+        if (this.plugin.settings.showNotice) {
+          new Notice("Please confirm your password");
+        }
         return;
       }
       if (this.password !== this.confirmPassword) {
-        new Notice("Passwords do not match");
+        if (this.plugin.settings.showNotice) {
+          new Notice("Passwords do not match");
+        }
         return;
       }
     }
 
     if (!this.isDecrypt && this.encryptionMode === "permanent") {
-      new Notice("Permanent encryption is not implemented yet");
+      if (this.plugin.settings.showNotice) {
+        new Notice("Permanent encryption is not implemented yet");
+      }
       return;
     }
 
