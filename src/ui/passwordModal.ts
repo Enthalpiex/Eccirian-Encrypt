@@ -62,7 +62,7 @@ export class PasswordModal extends Modal {
         .addDropdown(drop =>
           drop
             .addOption("temporary", "Temporary (Single Use)")
-            .addOption("permanent", "Permanent (Not Implemented)")
+            .addOption("permanent", "Permanent (Repeatable)")
             .setValue(this.encryptionMode)
             .onChange(value => {
               this.encryptionMode = value as "temporary" | "permanent";
@@ -141,7 +141,7 @@ export class PasswordModal extends Modal {
       });
   }
 
-  private submit() {
+  private async submit() {
     if (!this.password) {
       if (this.plugin.settings.showNotice) {
         new Notice("Please enter a password");
@@ -164,11 +164,10 @@ export class PasswordModal extends Modal {
       }
     }
 
-    if (!this.isDecrypt && this.encryptionMode === "permanent") {
-      if (this.plugin.settings.showNotice) {
-        new Notice("Permanent encryption is not implemented yet");
-      }
-      return;
+    if (!this.isDecrypt) {
+      const extension = this.encryptionMode === "permanent" ? "peccidian" : "eccidian";
+      this.plugin.settings.fileExtension = extension;
+      await this.plugin.saveSettings();
     }
 
     this.isSubmitted = true;
