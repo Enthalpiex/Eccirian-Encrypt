@@ -25,7 +25,7 @@ It introduces a custom `.eccidian` file extension and provides a unique read-onl
 ##  Features
 
 - 🔁 One-click encryption and decryption of `.md` files (or any other types) into `.eccidian`, and vice versa.
-- 🔒 AES-256 and ECC-256 based password encryption.
+- 🔒 AES-256-CGM and ECC-P-256 based password encryption.
 - 📄 Custom `eccidian-view` that shows a locked message instead of the default editor.
 - 🧷 Files remain read-only until unlocked via user input.
 - ⚙️ UI and control panel support.
