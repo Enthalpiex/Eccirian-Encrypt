@@ -40,7 +40,7 @@ export class PasswordModal extends Modal {
     const { contentEl } = this;
     contentEl.empty();
 
-    contentEl.createEl("h2", { text: "Eccidian Encryption" });
+    contentEl.createEl("h2", { text: "Eccirian Encryption" });
 
     if (!this.isDecrypt) {
       new Setting(contentEl)
@@ -165,7 +165,7 @@ export class PasswordModal extends Modal {
     }
 
     if (!this.isDecrypt) {
-      const extension = this.encryptionMode === "permanent" ? "peccidian" : "eccidian";
+      const extension = this.encryptionMode === "permanent" ? "peccidian" : "eccirian";
       this.plugin.settings.fileExtension = extension;
       await this.plugin.saveSettings();
     }
