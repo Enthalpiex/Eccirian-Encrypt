@@ -1,6 +1,6 @@
 {
-	"id": "eccidian",
-	"name": "Eccidian Encrypt",
+	"id": "eccirian",
+	"name": "Eccirian Encrypt",
 	"version": "0.1.0",
 	"minAppVersion": "0.15.0",
 	"description": "Encrypt your notes using advanced encryption algorithms.",
@@ -8,6 +8,4 @@
 	"authorUrl": "https://github.com/Enthalpiex",
 	"fundingUrl": "https://afdian.com/a/entropiex",
 	"isDesktopOnly": false,
-	"main": "main.js",
-	"css": "styles.css"
 }

@@ -16,7 +16,7 @@ export default class EccEncryptPlugin extends Plugin {
 
     this.addCommand({
       id: "encrypt-decrypt",
-      name: "Eccidian: Toggle between .md and .eccidian",
+      name: "Eccirian: Toggle between .md and .eccirian",
       callback: async () => {
         const activeFile = this.app.workspace.getActiveFile();
         if (!activeFile) {
@@ -27,17 +27,17 @@ export default class EccEncryptPlugin extends Plugin {
         }
 
         try {
-          if (activeFile.extension === "eccidian") {
+          if (activeFile.extension === "eccirian") {
             const mdFile = await changeFileExtension(this.app.vault, activeFile, "md");
             const leaf = this.app.workspace.getLeaf();
             await leaf.openFile(mdFile);
           } else if (activeFile.extension === "md") {
-            const eccFile = await changeFileExtension(this.app.vault, activeFile, "eccidian");
+            const eccFile = await changeFileExtension(this.app.vault, activeFile, "eccirian");
             const leaf = this.app.workspace.getLeaf();
             await leaf.openFile(eccFile);
           } else {
             if (this.settings.showNotice) {
-              new Notice("Only .md files can be converted to .eccidian");
+              new Notice("Only .md files can be converted to .eccirian");
             }
           }
         } catch (err) {
@@ -95,7 +95,7 @@ export default class EccEncryptPlugin extends Plugin {
               if (this.settings.encryptionMethod === "AES") {
                 const { salt, iv, data } = await encryptWithPassword(password, fileContent);
                 const encrypted = `%%ENC\nTYPE:${this.settings.defaultEncryptionMode}\nORIGINAL_EXT:${activeFile.extension}\nSALT:${salt}\nIV:${iv}\nDATA:${data}`;
-                const eccFile = await changeFileExtension(this.app.vault, activeFile, "eccidian");
+                const eccFile = await changeFileExtension(this.app.vault, activeFile, "eccirian");
                 await this.app.vault.modify(eccFile, encrypted);
                 if (this.settings.showNotice) {
                   new Notice("File encrypted");
@@ -105,7 +105,7 @@ export default class EccEncryptPlugin extends Plugin {
               } else {
                 const { salt, iv, data, publicKey } = await eccEncrypt(password, fileContent);
                 const encrypted = `%%ENC\nTYPE:${this.settings.defaultEncryptionMode}\nORIGINAL_EXT:${activeFile.extension}\nSALT:${salt}\nIV:${iv}\nDATA:${data}\nPUBLIC_KEY:${publicKey}`;
-                const eccFile = await changeFileExtension(this.app.vault, activeFile, "eccidian");
+                const eccFile = await changeFileExtension(this.app.vault, activeFile, "eccirian");
                 await this.app.vault.modify(eccFile, encrypted);
                 if (this.settings.showNotice) {
                   new Notice("File encrypted");
@@ -143,11 +143,11 @@ export default class EccEncryptPlugin extends Plugin {
       }
     );
 
-    this.registerExtensions(["eccidian"], ECCIDIAN_VIEW_TYPE);
+    this.registerExtensions(["eccirian"], ECCIDIAN_VIEW_TYPE);
 
     this.registerEvent(
       this.app.workspace.on("file-open", async (file) => {
-        if (file && file instanceof TFile && file.extension === "eccidian") {
+        if (file && file instanceof TFile && file.extension === "eccirian") {
           let leaf: WorkspaceLeaf;
           const activeLeaf = this.app.workspace.getActiveViewOfType(EccidianView)?.leaf;
           
@@ -263,7 +263,7 @@ export default class EccEncryptPlugin extends Plugin {
                 if (encryptionMethod === "AES") {
                   const { salt, iv, data } = await encryptWithPassword(password, fileContent);
                   const encrypted = `%%ENC\nTYPE:${this.settings.defaultEncryptionMode}\nORIGINAL_EXT:${activeFile.extension}\nSALT:${salt}\nIV:${iv}\nDATA:${data}${hint ? `\nHINT:${hint}` : ''}`;
-                  const eccFile = await changeFileExtension(this.app.vault, activeFile, "eccidian");
+                  const eccFile = await changeFileExtension(this.app.vault, activeFile, "eccirian");
                   await this.app.vault.modify(eccFile, encrypted);
                   if (this.settings.showNotice) {
                     new Notice("File encrypted");
@@ -273,7 +273,7 @@ export default class EccEncryptPlugin extends Plugin {
                 } else {
                   const { salt, iv, data, publicKey } = await eccEncrypt(password, fileContent);
                   const encrypted = `%%ENC\nTYPE:${this.settings.defaultEncryptionMode}\nORIGINAL_EXT:${activeFile.extension}\nSALT:${salt}\nIV:${iv}\nDATA:${data}\nPUBLIC_KEY:${publicKey}${hint ? `\nHINT:${hint}` : ''}`;
-                  const eccFile = await changeFileExtension(this.app.vault, activeFile, "eccidian");
+                  const eccFile = await changeFileExtension(this.app.vault, activeFile, "eccirian");
                   await this.app.vault.modify(eccFile, encrypted);
                   if (this.settings.showNotice) {
                     new Notice("File encrypted");
@@ -316,16 +316,16 @@ export default class EccEncryptPlugin extends Plugin {
         }
 
         try {
-          if (activeFile.extension === "eccidian") {
+          if (activeFile.extension === "eccirian") {
             const mdFile = await changeFileExtension(this.app.vault, activeFile, "md");
             const leaf = this.app.workspace.getLeaf();
             await leaf.openFile(mdFile);
           } else if (activeFile.extension === "md") {
-            const eccFile = await changeFileExtension(this.app.vault, activeFile, "eccidian");
+            const eccFile = await changeFileExtension(this.app.vault, activeFile, "eccirian");
             const leaf = this.app.workspace.getLeaf();
             await leaf.openFile(eccFile);
           } else {
-            new Notice("Only .md files can be converted to .eccidian");
+            new Notice("Only .md files can be converted to .eccirian");
           }
         } catch (err) {
           // 静默失败
