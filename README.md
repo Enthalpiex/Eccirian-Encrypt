@@ -1,4 +1,4 @@
-![Eccidian_RDM2 - pre](https://github.com/user-attachments/assets/e6ae4359-d1fe-4613-99b0-3edf6007cdec)
+![Eccirian_RDM2 - pre](https://github.com/user-attachments/assets/e6ae4359-d1fe-4613-99b0-3edf6007cdec)
 
 # ⚠️WARNING
 
@@ -60,7 +60,7 @@ You can clone the current repository to try it out first, but please do not upda
 ##  Usage
 
 1. Open any file.
-2. Run the `Eccirian: Encrypt/Decrypt Note` command from the Command Palette (`Ctrl+P`) or click left icon.
+2. Run the `Encrypt/Decrypt Note` command from the Command Palette (`Ctrl+P`) or click left icon.
 3. Enter a password to encrypt or decrypt.
 4. Encrypted files will be renamed to `.eccirian` and shown as locked views.
 5. Click “Unlock” and enter the password to decrypt and return to edit mode.

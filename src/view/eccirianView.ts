@@ -5,12 +5,12 @@ import { decryptWithPassword } from "../encryption/aesWithPassword";
 import EccEncryptPlugin from "../main";
 import { changeFileExtension } from "../utils/fileHelper";
 
-export const ECCIDIAN_VIEW_TYPE = "eccirian-view";
+export const ECCIRIAN_VIEW_TYPE = "eccirian-view";
 
-export class EccidianView extends FileView {
+export class EccirianView extends FileView {
   filePath: string;
   private loadingFile: boolean = false;
-  private displayName: string = "Encrypted Note";
+  private displayName: string = "Encrypted note";
   private plugin: EccEncryptPlugin;
 
   constructor(leaf: WorkspaceLeaf) {
@@ -25,7 +25,7 @@ export class EccidianView extends FileView {
   }
 
   getViewType(): string {
-    return ECCIDIAN_VIEW_TYPE;
+    return ECCIRIAN_VIEW_TYPE;
   }
 
   getDisplayText(): string {
@@ -71,51 +71,19 @@ export class EccidianView extends FileView {
 
     // 创建主容器
     const lockView = container.createDiv({ cls: 'eccirian-lock-view' });
-    lockView.style.cssText = `
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 2rem;
-      max-width: 600px;
-      margin: 0 auto;
-    `;
 
     // 创建锁图标
     const lockIcon = lockView.createDiv({ cls: 'eccirian-lock-icon' });
-    lockIcon.style.cssText = `
-      font-size: 64px;
-      margin-bottom: 1.5rem;
-      opacity: 0.8;
-      transition: transform 0.3s ease;
-    `;
     lockIcon.setText(icon);
 
     // 创建消息文本
     const message = lockView.createEl('p', { cls: 'eccirian-message' });
-    message.style.cssText = `
-      margin-bottom: 2rem;
-      font-size: 1.1rem;
-      color: var(--text-muted);
-      line-height: 1.5;
-    `;
-    message.setText(this.file ? `"${this.file.basename}" is encrypted. Click below to unlock.` : "This file is encrypted. Click below to unlock.");
-
+    message.setText(this.file
+      ? `"${this.file.basename}" is encrypted. Click below to unlock.`
+      : "This file is encrypted. Click below to unlock.");
+      
     // 创建解锁按钮
     const unlockBtn = lockView.createEl('button', { cls: 'eccirian-unlock-button' });
-    unlockBtn.style.cssText = `
-      padding: 0.75rem 1.5rem;
-      font-size: 1rem;
-      cursor: pointer;
-      border-radius: 6px;
-      border: 1px solid var(--background-modifier-border);
-      background-color: var(--background-primary);
-      color: var(--text-normal);
-      transition: all 0.2s ease;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    `;
     unlockBtn.setText('Unlock');
 
     // 添加按钮悬停效果

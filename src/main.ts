@@ -5,7 +5,7 @@ import { PasswordModal } from "./ui/passwordModal";
 import { EccEncryptSettingTab } from "./ui/settingsTab";
 import { DEFAULT_SETTINGS, EccEncryptSettings } from "./settings";
 import { changeFileExtension } from "./utils/fileHelper";
-import { EccidianView, ECCIDIAN_VIEW_TYPE } from "./view/eccidianView";
+import { EccirianView, ECCIRIAN_VIEW_TYPE } from "./view/eccirianView";
 
 export default class EccEncryptPlugin extends Plugin {
   settings: EccEncryptSettings;
@@ -15,8 +15,8 @@ export default class EccEncryptPlugin extends Plugin {
     await this.loadSettings();
 
     this.addCommand({
-      id: "encrypt-decrypt",
-      name: "Eccirian: Toggle between .md and .eccirian",
+      id: "toggle-encryption",
+      name: "Toggle between .md and .eccirian",
       callback: async () => {
         const activeFile = this.app.workspace.getActiveFile();
         if (!activeFile) {
@@ -46,7 +46,7 @@ export default class EccEncryptPlugin extends Plugin {
       }
     });
 
-    this.addRibbonIcon(this.settings.iconStyle, "Encrypt/Decrypt Current File", async () => {
+    this.addRibbonIcon(this.settings.iconStyle, "Encrypt/decrypt current file", async () => {
       const activeFile = this.app.workspace.getActiveFile();
       if (!activeFile) {
         if (this.settings.showNotice) {
@@ -136,50 +136,16 @@ export default class EccEncryptPlugin extends Plugin {
     this.updateToggleExtensionButton();
 
     this.registerView(
-      ECCIDIAN_VIEW_TYPE,
+      ECCIRIAN_VIEW_TYPE,
       (leaf) => {
-        const view = new EccidianView(leaf);
+        const view = new EccirianView(leaf);
         return view;
       }
     );
 
-    this.registerExtensions(["eccirian"], ECCIDIAN_VIEW_TYPE);
-
-    this.registerEvent(
-      this.app.workspace.on("file-open", async (file) => {
-        if (file && file instanceof TFile && file.extension === "eccirian") {
-          let leaf: WorkspaceLeaf;
-          const activeLeaf = this.app.workspace.getActiveViewOfType(EccidianView)?.leaf;
-          
-          if (activeLeaf) {
-            leaf = activeLeaf;
-          } else {
-            leaf = this.app.workspace.getLeaf();
-          }
-
-          if (leaf.view.getViewType() !== ECCIDIAN_VIEW_TYPE) {
-            await leaf.setViewState({
-              type: ECCIDIAN_VIEW_TYPE,
-              active: true
-            });
-          }
-
-          const view = leaf.view as EccidianView;
-          const currentFile = this.app.vault.getAbstractFileByPath(file.path);
-          if (currentFile instanceof TFile) {
-            await view.setState({ 
-              file: currentFile
-            }, { history: true });
-          }
-        }
-      })
-    );
+    this.registerExtensions(["eccirian"], ECCIRIAN_VIEW_TYPE);
 
     this.addSettingTab(new EccEncryptSettingTab(this.app, this));
-
-    this.registerDomEvent(document, "DOMContentLoaded", () => {
-      this.loadStyles();
-    });
 
     this.addCommand({
       id: "encrypt-decrypt-file",
@@ -342,7 +308,7 @@ export default class EccEncryptPlugin extends Plugin {
   }
 
   async switchToMarkdownView(file: TFile) {
-    this.app.workspace.detachLeavesOfType(ECCIDIAN_VIEW_TYPE);
+    this.app.workspace.detachLeavesOfType(ECCIRIAN_VIEW_TYPE);
     const leaf = this.app.workspace.getLeaf();
     await leaf.openFile(file, { state: { mode: "source" } });
   }
@@ -353,13 +319,5 @@ export default class EccEncryptPlugin extends Plugin {
 
   async saveSettings() {
     await this.saveData(this.settings);
-  }
-
-  loadStyles() {
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.type = "text/css";
-    link.href = this.app.vault.adapter.getResourcePath(`${this.manifest.dir}/styles.css`);
-    document.head.appendChild(link);
   }
 }
