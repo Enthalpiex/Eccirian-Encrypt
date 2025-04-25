@@ -5,19 +5,19 @@ import { decryptWithPassword } from "../encryption/aesWithPassword";
 import EccEncryptPlugin from "../main";
 import { changeFileExtension } from "../utils/fileHelper";
 
-export const ECCIDIAN_VIEW_TYPE = "eccidian-view";
+export const ECCIRIAN_VIEW_TYPE = "eccirian-view";
 
-export class EccidianView extends FileView {
+export class EccirianView extends FileView {
   filePath: string;
   private loadingFile: boolean = false;
-  private displayName: string = "Encrypted Note";
+  private displayName: string = "Encrypted note";
   private plugin: EccEncryptPlugin;
 
   constructor(leaf: WorkspaceLeaf) {
     super(leaf);
     this.filePath = "";
     this.navigation = true;
-    this.plugin = (this.app as any).plugins.getPlugin('eccidian');
+    this.plugin = (this.app as any).plugins.getPlugin('eccirian');
   }
 
   updateTitle(newTitle: string) {
@@ -25,7 +25,7 @@ export class EccidianView extends FileView {
   }
 
   getViewType(): string {
-    return ECCIDIAN_VIEW_TYPE;
+    return ECCIRIAN_VIEW_TYPE;
   }
 
   getDisplayText(): string {
@@ -70,52 +70,20 @@ export class EccidianView extends FileView {
     const icon = iconMap[this.plugin.settings.iconStyle] || "🔒";
 
     // 创建主容器
-    const lockView = container.createDiv({ cls: 'eccidian-lock-view' });
-    lockView.style.cssText = `
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 2rem;
-      max-width: 600px;
-      margin: 0 auto;
-    `;
+    const lockView = container.createDiv({ cls: 'eccirian-lock-view' });
 
     // 创建锁图标
-    const lockIcon = lockView.createDiv({ cls: 'eccidian-lock-icon' });
-    lockIcon.style.cssText = `
-      font-size: 64px;
-      margin-bottom: 1.5rem;
-      opacity: 0.8;
-      transition: transform 0.3s ease;
-    `;
+    const lockIcon = lockView.createDiv({ cls: 'eccirian-lock-icon' });
     lockIcon.setText(icon);
 
     // 创建消息文本
-    const message = lockView.createEl('p', { cls: 'eccidian-message' });
-    message.style.cssText = `
-      margin-bottom: 2rem;
-      font-size: 1.1rem;
-      color: var(--text-muted);
-      line-height: 1.5;
-    `;
-    message.setText(this.file ? `"${this.file.basename}" is encrypted. Click below to unlock.` : "This file is encrypted. Click below to unlock.");
-
+    const message = lockView.createEl('p', { cls: 'eccirian-message' });
+    message.setText(this.file
+      ? `"${this.file.basename}" is encrypted. Click below to unlock.`
+      : "This file is encrypted. Click below to unlock.");
+      
     // 创建解锁按钮
-    const unlockBtn = lockView.createEl('button', { cls: 'eccidian-unlock-button' });
-    unlockBtn.style.cssText = `
-      padding: 0.75rem 1.5rem;
-      font-size: 1rem;
-      cursor: pointer;
-      border-radius: 6px;
-      border: 1px solid var(--background-modifier-border);
-      background-color: var(--background-primary);
-      color: var(--text-normal);
-      transition: all 0.2s ease;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    `;
+    const unlockBtn = lockView.createEl('button', { cls: 'eccirian-unlock-button' });
     unlockBtn.setText('Unlock');
 
     // 添加按钮悬停效果
@@ -168,7 +136,7 @@ export class EccidianView extends FileView {
         const originalExtMatch = content.match(/ORIGINAL_EXT:(.+)/);
 
         if (!saltMatch || !ivMatch || !dataMatch || !typeMatch || !originalExtMatch) {
-          await changeFileExtension(this.app.vault, mdFile, "eccidian");
+          await changeFileExtension(this.app.vault, mdFile, "eccirian");
           if (this.plugin.settings.showNotice) {
             new Notice("Decryption failed: Invalid file format");
           }
@@ -193,7 +161,7 @@ export class EccidianView extends FileView {
                   dataMatch[1]
                 );
               } catch (err) {
-                await changeFileExtension(this.app.vault, mdFile, "eccidian");
+                await changeFileExtension(this.app.vault, mdFile, "eccirian");
                 if (this.plugin.settings.showNotice) {
                   new Notice("Decryption failed: Password may be incorrect");
                 }
@@ -216,7 +184,7 @@ export class EccidianView extends FileView {
               }
 
             } catch (err) {
-              await changeFileExtension(this.app.vault, mdFile, "eccidian");
+              await changeFileExtension(this.app.vault, mdFile, "eccirian");
               if (this.plugin.settings.showNotice) {
                 new Notice("Decryption failed: Unexpected error");
               }
@@ -225,7 +193,7 @@ export class EccidianView extends FileView {
           },
           async () => {
             try {
-              await changeFileExtension(this.app.vault, mdFile, "eccidian");
+              await changeFileExtension(this.app.vault, mdFile, "eccirian");
             } catch (err) {
               if (this.plugin.settings.showNotice) {
                 new Notice("Failed to restore file extension");

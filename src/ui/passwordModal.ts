@@ -40,11 +40,13 @@ export class PasswordModal extends Modal {
     const { contentEl } = this;
     contentEl.empty();
 
-    contentEl.createEl("h2", { text: "Eccidian Encryption" });
+    new Setting(contentEl)
+      .setName("Eccirian encryption")
+      .setHeading();
 
     if (!this.isDecrypt) {
       new Setting(contentEl)
-        .setName("Encryption Method")
+        .setName("Encryption method")
         .setDesc("Choose encryption method")
         .addDropdown(drop =>
           drop
@@ -57,11 +59,11 @@ export class PasswordModal extends Modal {
         );
 
       new Setting(contentEl)
-        .setName("Encryption Mode")
+        .setName("Encryption mode")
         .setDesc("Choose encryption mode")
         .addDropdown(drop =>
           drop
-            .addOption("temporary", "Temporary (Single Use)")
+            .addOption("temporary", "Temporary (Single use)")
             .addOption("permanent", "Permanent (Repeatable)")
             .setValue(this.encryptionMode)
             .onChange(value => {
@@ -91,7 +93,7 @@ export class PasswordModal extends Modal {
 
     if (!this.isDecrypt && this.requirePasswordConfirmation) {
       new Setting(contentEl)
-        .setName("Confirm Password")
+        .setName("Confirm password")
         .addText(text => {
           text
             .setPlaceholder("Confirm password")
@@ -110,7 +112,7 @@ export class PasswordModal extends Modal {
 
     if (!this.isDecrypt && this.showHint) {
       new Setting(contentEl)
-        .setName("Password Hint")
+        .setName("Password hint")
         .setDesc("Optional hint to help remember the password")
         .addText(text => {
           text
@@ -165,7 +167,7 @@ export class PasswordModal extends Modal {
     }
 
     if (!this.isDecrypt) {
-      const extension = this.encryptionMode === "permanent" ? "peccidian" : "eccidian";
+      const extension = this.encryptionMode === "permanent" ? "peccirian" : "eccirian";
       this.plugin.settings.fileExtension = extension;
       await this.plugin.saveSettings();
     }

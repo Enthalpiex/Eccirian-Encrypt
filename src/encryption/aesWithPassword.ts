@@ -65,10 +65,15 @@ export async function encryptWithPassword(password: string, text: string) {
   }
   
   function bufferToBase64(buffer: ArrayBuffer | Uint8Array): string {
-    return Buffer.from(buffer).toString("base64");
+    return btoa(String.fromCharCode(...new Uint8Array(buffer)));
   }
   
   function base64ToBuffer(base64: string): Uint8Array {
-    return new Uint8Array(Buffer.from(base64, "base64"));
+    const binaryString = atob(base64);
+    const bytes = new Uint8Array(binaryString.length);
+    for (let i = 0; i < binaryString.length; i++) {
+      bytes[i] = binaryString.charCodeAt(i);
+    }
+    return bytes;
   }
   
