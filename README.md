@@ -72,11 +72,9 @@ Compared to similar plugins (e.x. *[Meld Encrypt](https://github.com/meld-cp/obs
 
 ##  Installation
 
-### Method 1. (Under review) Official Community Release
+### Method 1. Official Community Release
 
-To be published to the Obsidian Community Plugin Marketplace.
-
-You can clone the current repository to try it out first, but please do not update before the official release - the encryption logic may **change**.
+Download via the Obsidian [Community Plugin Marketplace](https://obsidian.md/plugins?search=eccirian#).
 
 
 ###  Method 2. Release File
