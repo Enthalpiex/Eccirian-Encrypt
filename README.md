@@ -1,30 +1,30 @@
-![Eccidian_RDM2 - pre](https://github.com/user-attachments/assets/e6ae4359-d1fe-4613-99b0-3edf6007cdec)
+![Eccirian_RDM2 - pre](https://github.com/user-attachments/assets/e6ae4359-d1fe-4613-99b0-3edf6007cdec)
 
 # ⚠️WARNING: EARLY ACCESS 0.9.0
 
-# Eccidian Encrypt – Encrypted Files for Obsidian
+# Eccirian Encrypt – Encrypted Files for Obsidian
 
 The better encryption plugin for Obsidian. Encrypt your files.
 
-**Eccidian** is a security-focused Obsidian encryption plugin that supports seamless encryption and decryption of files using multiple advanced password-based encryption methods. 
+**eccirian** is a security-focused Obsidian encryption plugin that supports seamless encryption and decryption of files using multiple advanced password-based encryption methods. 
 
 It introduces a custom file extensions and provides a unique read-only view for locked files, allowing you to easily manage sensitive information directly in Obsidian.
 
 
-[![Stars](https://img.shields.io/github/stars/Enthalpiex/Eccidian-Encrypt?style=social)](https://github.com/Enthalpiex/Eccidian-Encrypt/stargazers)
-[![Release](https://img.shields.io/github/v/release/Enthalpiex/Eccidian-Encrypt?include_prereleases&label=release)](https://github.com/Enthalpiex/Eccidian-Encrypt/releases)
-[![Issues](https://img.shields.io/github/issues/Enthalpiex/Eccidian-Encrypt)](https://github.com/Enthalpiex/Eccidian-Encrypt/issues)
-[![License](https://img.shields.io/github/license/Enthalpiex/Eccidian-Encrypt)](https://github.com/Enthalpiex/Eccidian-Encrypt/blob/main/LICENSE)
-[![Last Commit](https://img.shields.io/github/last-commit/Enthalpiex/Eccidian-Encrypt)](https://github.com/Enthalpiex/Eccidian-Encrypt/commits/main)
+[![Stars](https://img.shields.io/github/stars/Enthalpiex/eccirian-Encrypt?style=social)](https://github.com/Enthalpiex/eccirian-Encrypt/stargazers)
+[![Release](https://img.shields.io/github/v/release/Enthalpiex/eccirian-Encrypt?include_prereleases&label=release)](https://github.com/Enthalpiex/eccirian-Encrypt/releases)
+[![Issues](https://img.shields.io/github/issues/Enthalpiex/eccirian-Encrypt)](https://github.com/Enthalpiex/eccirian-Encrypt/issues)
+[![License](https://img.shields.io/github/license/Enthalpiex/eccirian-Encrypt)](https://github.com/Enthalpiex/eccirian-Encrypt/blob/main/LICENSE)
+[![Last Commit](https://img.shields.io/github/last-commit/Enthalpiex/eccirian-Encrypt)](https://github.com/Enthalpiex/eccirian-Encrypt/commits/main)
 
 
 ---
 
-##  Why Eccidian?
+##  Why eccirian?
 
-Eccidian is designed for users who want secure encryption in Obsidian **without sacrificing speed, usability, or compatibility**.
+eccirian is designed for users who want secure encryption in Obsidian **without sacrificing speed, usability, or compatibility**.
 
-Compared to similar plugins (e.x. *[Meld Encrypt](https://github.com/meld-cp/obsidian-encrypt)*), Eccidian offers:
+Compared to similar plugins (e.x. *[Meld Encrypt](https://github.com/meld-cp/obsidian-encrypt)*), eccirian offers:
 
 - ⚡ **Low performance overhead** — encryption and decryption happen instantly with no noticeable lag.
 - 🧩 **Optional composite encryption methods** — choose your level of security.
@@ -84,12 +84,12 @@ You can clone the current repository to try it out first, but please do not upda
 2. Move the files into your Obsidian vault's plugin directory:
 
 ```
-<your-vault>/.obsidian/plugins/eccidian-encrypt/
+<your-vault>/.obsidian/plugins/eccirian-encrypt/
 ```
 
 3. Open Obsidian:
    - Go to **Settings → Community Plugins**.
-   - Enable **Eccidian Encrypt** from the list.
+   - Enable **eccirian Encrypt** from the list.
 
 ---
 
@@ -99,15 +99,15 @@ Temporary encryption: Your file will be converted to ordinary md when decrypted.
 Permanent encryption: Your file will retain the password you originally set and will remain valid after decryption.
 
 1. Open any file.
-2. Run the `Eccidian Encrypt: Encrypt/Decrypt Note` command from the Command Palette (`Ctrl+P`) or click left icon.
+2. Run the `eccirian Encrypt: Encrypt/Decrypt Note` command from the Command Palette (`Ctrl+P`) or click left icon.
 3. Enter a password to encrypt or decrypt.
-4. Encrypted files will be renamed to `.eccidian` or `.peccidian`and shown as locked views.
+4. Encrypted files will be renamed to `.eccirian` or `.peccirian`and shown as locked views.
 5. Click “Unlock” and enter the password to decrypt and return to edit mode.
 
 ## Others 
 
-6. Run the `Eccidian Encrypt: Convert to Markdown` command from the Command Palette (`Ctrl+P`) or click left icon to decrypt the peccidian file into a normal file.
-7. Run the `Eccidian Encrypt: Toggle file Extension` command from the Command Palette (`Ctrl+P`) or click left icon to force conversion between md and eccidian files, or create fake encrypted views.
+6. Run the `eccirian Encrypt: Convert to Markdown` command from the Command Palette (`Ctrl+P`) or click left icon to decrypt the peccirian file into a normal file.
+7. Run the `eccirian Encrypt: Toggle file Extension` command from the Command Palette (`Ctrl+P`) or click left icon to force conversion between md and eccirian files, or create fake encrypted views.
 
 ---
 
