@@ -3,7 +3,7 @@
 
 # ⚠️WARNING: EARLY ACCESS 0.9.0
 
-# Eccirian Encrypt – Encrypted Files for Obsidian
+# Eccirian Encrypt – Encrypt Files for Obsidian
 
 The better encryption plugin for Obsidian. Encrypt your files.
 
