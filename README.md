@@ -36,15 +36,15 @@ Compared to similar plugins (e.x. *[Meld Encrypt](https://github.com/meld-cp/obs
 
 ---
 
-##  Features
+##  Features Includes: 
 
-- 🔁 One-click encryption/decryption of **any** file type—not just `.md`.
-- 🔒 AES and ECC based password encryption.
-- 📄 Custom view that shows a locked page instead of the default editor.
-- 🧷 Files remain read-only until unlocked via user input.
-- ⚙️ UI and control panel support.
-- 📦 Modular architecture for maintainability and expansion.
-- ☁️ Cloud-sync and sharing friendly.
+- One-click encryption/decryption of **any** file type—not just `.md`.
+- AES and ECC based password encryption.
+- Custom view that shows a locked page instead of the default editor.
+- Files remain read-only until unlocked via user input.
+- UI and control panel support.
+- Modular architecture for maintainability and expansion.
+- Cloud-sync and sharing friendly.
 
 ---
 
