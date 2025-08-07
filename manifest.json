@@ -1,6 +1,6 @@
 {
-	"id": "eccidian",
-	"name": "Eccidian Encrypt",
+	"id": "eccirian",
+	"name": "Eccirian Encrypt",
 	"version": "0.9.0",
 	"minAppVersion": "0.15.0",
 	"description": "Encrypt your files using advanced encryption algorithms.",
