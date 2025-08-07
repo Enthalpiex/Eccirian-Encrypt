@@ -1,4 +1,4 @@
-<img width="2917" height="961" alt="Eccirian_preview" src="https://github.com/user-attachments/assets/24ad676d-7194-439e-9faf-0e02f4bc5e84" />
+<img alt="Eccirian_preview" src="https://github.com/user-attachments/assets/24ad676d-7194-439e-9faf-0e02f4bc5e84" />
 
 
 # ⚠️WARNING: EARLY ACCESS 0.9.0
