@@ -1,7 +1,8 @@
 <img alt="Eccirian_preview" src="https://github.com/user-attachments/assets/24ad676d-7194-439e-9faf-0e02f4bc5e84" />
 
+# ⚠️WARNING: EARLY ACCESS 0.9.1
 
-# ⚠️WARNING: EARLY ACCESS 0.1.0
+### If you cannot open the file, please download manifestfix.json and rename it to manifast.json instead of the original manifast file.
 
 # Eccirian Encrypt – Encrypt Files for Obsidian
 
