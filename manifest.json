@@ -8,5 +8,6 @@
 	"authorUrl": "https://github.com/Enthalpiex",
 	"fundingUrl": "https://afdian.com/a/entropiex",
 	"isDesktopOnly": false,
+	"main": "main.js",
 	"css": "styles.css"
 }
