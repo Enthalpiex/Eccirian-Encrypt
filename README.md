@@ -15,7 +15,7 @@
 
 # Early Access 0.9.8
 
-**Eccirian Encrypt** is a security-focused Obsidian plugin, provides seamless file encryption with advanced features. The plugin adds file-level encryption and decryption capabilities to your vault, using AES-256-GCM and ECC-P-256 cryptographic encryption algorithms. By introduces custom file extensions and read-only view for locked files, allowing you to easily manage sensitive information directly in Obsidian. It is also the only plugin that supports one-click encryption of all link attachments.
+**Eccirian Encrypt** is a security-focused Obsidian plugin which provides seamless file encryption. The plugin adds file-level encryption and decryption capabilities to your vault, using AES-256-GCM and ECC-P-256 cryptographic encryption algorithms. By introduces custom file extensions and read-only view for locked files, allowing you to easily manage sensitive information directly in Obsidian. It is also the only plugin that supports one-click encryption of all link attachments.
 
 ## Why Eccirian?
 
