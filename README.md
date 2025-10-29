@@ -15,23 +15,21 @@
 
 # Early Access 0.9.8
 
-**Eccirian Encrypt** is a powerful, security-focused Obsidian plugin, provides seamless file encryption with advanced features.
-
-It introduces custom file extensions and provides a unique read-only view for locked files, allowing you to easily manage sensitive information directly in Obsidian. It is also the only plugin that supports one-click encryption of all link attachments.
+**Eccirian Encrypt** is a security-focused Obsidian plugin, provides seamless file encryption with advanced features. The plugin adds file-level encryption and decryption capabilities to your vault, using AES-256-GCM and ECC-P-256 cryptographic encryption algorithms. By introduces custom file extensions and read-only view for locked files, allowing you to easily manage sensitive information directly in Obsidian. It is also the only plugin that supports one-click encryption of all link attachments.
 
 ## Why Eccirian?
 
-### **Attachment Encryption**
-Unlike other encryption plugins that only encrypt note content, Eccirian can **encrypt your attachments** (images, PDFs, documents) alongside your notes. 
+### Attachment Encryption
+Unlike other encryption plugins that only encrypt note content, Eccirian can **encrypt your attachments** (images, PDFs, documents) alongside your notes.
 
-### **Lightning Fast**
-Zero performance overhead. Encryption and decryption happen instantly with no noticeable lag.
+### Lightning Fast
+Zero performance overhead. Encryption and decryption both utilize the browser's native Web Crypto API `crypto.subtle` for hardware-accelerated AES-GCM operations. Key derivation meets OWASP's minimum security requirements without sacrificing speed by useing the `PBKDF2` algorithm.
 
-### **Flexible Mode Switching**
+### Flexible Mode Switching
 - **Temporary Mode** (`.eccirian`) - One-time password, auto-decrypt on open
-- **Permanent Mode** (`.peccirian`) - Persistent encryption, password required every time
+- **Permanent Mode** (`.peccirian`) - Persistent encryption, password are required every time
 
-### **Multiple Encryption Algorithms**
+### **Maximum Security**
 - **AES-256-GCM** - Industry standard symmetric encryption
 - **ECC + AES** - Hybrid encryption for maximum security
 
@@ -42,13 +40,12 @@ Zero performance overhead. Encryption and decryption happen instantly with no no
 Compared to similar plugins (e.x. *[Meld Encrypt](https://github.com/meld-cp/obsidian-encrypt)*), eccirian offers:
 
 - ⚡ **Low Performance Overhead** - Encryption and decryption happen instantly with no noticeable lag
-- 🧩 Optional Composite Encryption methods - Choose your level of security
+- 🧩 **Composite Encryption methods** - Optional hybrid Elliptic Curve Cryptography asymmetric encryption
 - 🔐 **Flexible Mode Switching** - Protect both your markdown files and linked attachments
 - 📁 **Any File Type** - Not limited to `.md` files, encrypt any file format
 - 🎨 **Customized Lock Screen** - Custom read-only view for encrypted files
-- 🖼️**Super compatibility** - Full compatibility with `Hover Editor` and `Page Previewon hover`
-- ⚙️ **Flexible Settings** - Customize encryption behavior to your needs
-- 🔐 **ECC (Elliptic Curve Cryptography)** hybrid asymmetric encryption for advanced users
+- 🖼️**Super Compatibility** - Full compatibility with all hover preview and editing plugins
+- ⚙️ **Hardware Acceleration** - Supports hardware-accelerated encryption and decryption
 - ☁️ **Cloud-sync friendly** - Encrypted files work seamlessly with sync services
 
 ---
