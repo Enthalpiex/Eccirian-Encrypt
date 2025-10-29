@@ -1,13 +1,10 @@
 {
 	"id": "eccirian",
 	"name": "Eccirian Encrypt",
-	"version": "0.1.0",
+	"version": "0.9.8",
 	"minAppVersion": "0.15.0",
 	"description": "Encrypt your files using advanced encryption algorithms.",
-	"author": "Entropiex", 
+	"author": "Entropiex",
 	"authorUrl": "https://github.com/Enthalpiex",
-	"fundingUrl": "https://afdian.com/a/entropiex",
-	"isDesktopOnly": false,
-	"main": "main.js",
-	"css": "styles.css"
+	"fundingUrl": "https://afdian.com/a/entropiex"
 }
