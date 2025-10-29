@@ -1,125 +1,190 @@
-<img alt="Eccirian_preview" src="https://github.com/user-attachments/assets/24ad676d-7194-439e-9faf-0e02f4bc5e84" />
+<img alt="Eccirian_preview" src="https://github.com/user-attachments/assets/dfa58b45-0136-4b81-b29d-851cf82a3554" />
 
-# ⚠️WARNING: EARLY ACCESS 0.9.1
+# Eccirian Encrypt – Advanced Encryption for Obsidian
 
-### If you cannot open the file, please download manifestfix.json and rename it to manifast.json instead of the original manifast file.
-
-# Eccirian Encrypt – Encrypt Files for Obsidian
-
-The better encryption plugin for Obsidian. Encrypt your files.
-
-**eccirian** is a security-focused Obsidian encryption plugin that supports seamless encryption and decryption of files using multiple advanced password-based encryption methods. 
-
-It introduces a custom file extensions and provides a unique read-only view for locked files, allowing you to easily manage sensitive information directly in Obsidian.
-
+[![Version](https://img.shields.io/badge/version-0.9.8-blue.svg)](https://github.com/Enthalpiex/eccirian-encrypt/releases)
+[![License](https://img.shields.io/badge/license-MPL--2.0-green.svg)](LICENSE)
+[![Obsidian](https://img.shields.io/badge/Obsidian-0.15.0+-purple.svg)](https://obsidian.md)
 
 [![Stars](https://img.shields.io/github/stars/Enthalpiex/eccirian-Encrypt?style=social)](https://github.com/Enthalpiex/eccirian-Encrypt/stargazers)
 [![Release](https://img.shields.io/github/v/release/Enthalpiex/eccirian-Encrypt?include_prereleases&label=release)](https://github.com/Enthalpiex/eccirian-Encrypt/releases)
 [![Issues](https://img.shields.io/github/issues/Enthalpiex/eccirian-Encrypt)](https://github.com/Enthalpiex/eccirian-Encrypt/issues)
-[![License](https://img.shields.io/github/license/Enthalpiex/eccirian-Encrypt)](https://github.com/Enthalpiex/eccirian-Encrypt/blob/main/LICENSE)
 [![Last Commit](https://img.shields.io/github/last-commit/Enthalpiex/eccirian-Encrypt)](https://github.com/Enthalpiex/eccirian-Encrypt/commits/main)
-
 
 ---
 
-##  Why eccirian?
+# Early Access 0.9.8
 
-eccirian is designed for users who want secure encryption in Obsidian **without sacrificing speed, usability, or compatibility**.
+**Eccirian Encrypt** is a powerful, security-focused Obsidian plugin, provides seamless file encryption with advanced features.
+
+It introduces custom file extensions and provides a unique read-only view for locked files, allowing you to easily manage sensitive information directly in Obsidian. It is also the only plugin that supports one-click encryption of all link attachments.
+
+## Why Eccirian?
+
+### **Attachment Encryption**
+Unlike other encryption plugins that only encrypt note content, Eccirian can **encrypt your attachments** (images, PDFs, documents) alongside your notes. 
+
+### **Lightning Fast**
+Zero performance overhead. Encryption and decryption happen instantly with no noticeable lag.
+
+### **Flexible Mode Switching**
+- **Temporary Mode** (`.eccirian`) - One-time password, auto-decrypt on open
+- **Permanent Mode** (`.peccirian`) - Persistent encryption, password required every time
+
+### **Multiple Encryption Algorithms**
+- **AES-256-GCM** - Industry standard symmetric encryption
+- **ECC + AES** - Hybrid encryption for maximum security
+
+---
+
+##  Features
 
 Compared to similar plugins (e.x. *[Meld Encrypt](https://github.com/meld-cp/obsidian-encrypt)*), eccirian offers:
 
-- ⚡ **Low performance overhead** — encryption and decryption happen instantly with no noticeable lag.
-- 🧩 **Optional composite encryption methods** — choose your level of security.
-- 🔁 **Flexible mode switching** — choose between temporary or permanent encryption.
-- 🖼️ **Full compatibility** with `Hover Editor` and `Page Preview` — thanks to the locked page view, you won't get annoying popups on hover.
-- 🖋️ **Customizable locked page** — personalize the locked view message and appearance.
-- 🛡️ **Minimal interference with workflow** — locked files integrate cleanly into your vault without breaking navigation or previews.
+- ⚡ **Low Performance Overhead** - Encryption and decryption happen instantly with no noticeable lag
+- 🧩 Optional Composite Encryption methods - Choose your level of security
+- 🔐 **Flexible Mode Switching** - Protect both your markdown files and linked attachments
+- 📁 **Any File Type** - Not limited to `.md` files, encrypt any file format
+- 🎨 **Customized Lock Screen** - Custom read-only view for encrypted files
+- 🖼️**Super compatibility** - Full compatibility with `Hover Editor` and `Page Previewon hover`
+- ⚙️ **Flexible Settings** - Customize encryption behavior to your needs
+- 🔐 **ECC (Elliptic Curve Cryptography)** hybrid asymmetric encryption for advanced users
+- ☁️ **Cloud-sync friendly** - Encrypted files work seamlessly with sync services
 
 ---
 
-##  Features Includes: 
 
-- One-click encryption/decryption of **any** file type—not just `.md`.
-- AES and ECC based password encryption.
-- Custom view that shows a locked page instead of the default editor.
-- Files remain read-only until unlocked via user input.
-- UI and control panel support.
-- Modular architecture for maintainability and expansion.
-- Cloud-sync and sharing friendly.
+## Compare
 
----
-
-##  Security
-
-1. **AES-256-GCM**
-   - 256-bit key length
-   - Galois/Counter Mode (GCM) for authenticated encryption
-   - PBKDF2 key derivation with 100,000 iterations
-   - SHA-256 hash function
-   - 16-byte random salt
-   - 12-byte initialization vector (IV)
-
-2. **ECC+AES**
-   - P-256 curve (secp256r1)
-   - ECDH key exchange
-   - Combined with AES-GCM for data encryption
-   - Same PBKDF2 parameters as AES method
-
-- **Password Protection**: Passwords are never stored in any form.
-- **Decryption**: For the permanently encrypted files you set, they will never be automatically decrypted to the hard disk unless you allow them to be.
-- **Salt Protection**: Unique salt for each encryption prevents rainbow table attacks.
+| Feature | Eccirian Encrypt | Meld Encrypt | Other Plugins |
+|---------|------------------|--------------|---------------|
+| **Attachment Encryption** | ✅ Yes | ❌ No | ❌ No |
+| **Lock Screen View** | ✅ Yes | ❌ No | ❌ No |
+| **Super Compatibility** | ✅ Yes | ❌ No | ⚠️ Varies |
+| **Multiple Algorithms** | ✅ AES + ECC | ⚠️ AES | ⚠️ Varies |
+| **Temporary Encryption** | ✅ Yes | ❌ No | ❌ No |
+| **Performance** | ⚡ Instant | ✅ Normal | ⚠️ Varies |
+| **Cloud Sync Friendly** | ✅ Yes | ✅ Yes | ⚠️ Varies |
 
 ---
 
-##  Installation
+## Security & Encryption Algorithms
 
-### Method 1. Official Community Release
+**1. AES-256-GCM (Default)**
+ - 256-bit key length
+ - Galois/Counter Mode (GCM) for authenticated encryption
+ - PBKDF2 key derivation with 100,000 iterations
+ - SHA-256 hash function
+ - 16-byte random salt per encryption
+ - 12-byte initialization vector (IV)
 
-Download via the Obsidian [Community Plugin Marketplace](https://obsidian.md/plugins?search=eccirian#).
+**2. ECC + AES (Advanced)**
 
+ - P-256 elliptic curve (secp256r1)
+ - ECDH key exchange for key agreement
+ - Combined with AES-256-GCM for data encryption
+ - Same PBKDF2 parameters as AES method
 
-###  Method 2. Release File
+In addition:
 
-1. **Download & extract** the release.
-2. Move the files into your Obsidian vault's plugin directory:
-
-```
-<your-vault>/.obsidian/plugins/eccirian-encrypt/
-```
-
-3. Open Obsidian:
-   - Go to **Settings → Community Plugins**.
-   - Enable **eccirian Encrypt** from the list.
-
----
-
-##  Usage
-
-Temporary encryption: Your file will be converted to ordinary md when decrypted.
-Permanent encryption: Your file will retain the password you originally set and will remain valid after decryption.
-
-1. Open any file.
-2. Run the `eccirian Encrypt: Encrypt/Decrypt Note` command from the Command Palette (`Ctrl+P`) or click left icon.
-3. Enter a password to encrypt or decrypt.
-4. Encrypted files will be renamed to `.eccirian` or `.peccirian`and shown as locked views.
-5. Click “Unlock” and enter the password to decrypt and return to edit mode.
-
-## Others 
-
-6. Run the `eccirian Encrypt: Convert to Markdown` command from the Command Palette (`Ctrl+P`) or click left icon to decrypt the peccirian file into a normal file.
-7. Run the `eccirian Encrypt: Toggle file Extension` command from the Command Palette (`Ctrl+P`) or click left icon to force conversion between md and eccirian files, or create fake encrypted views.
+- **Password Protection** - Passwords are never saved anywhere
+- **Unique Salts** - Each encryption uses a fresh random salt
+- **Authenticated Encryption** - GCM mode prevents tampering
+- **Memory-only Decryption** - Permanent mode files stay encrypted on disk
 
 ---
 
-##  Security Notes
+## 📦 Installation
 
-- The plugin is designed for personal use and basic security needs.
-- Do not use it for storing highly sensitive or critical information.
-- The developer is not responsible for any loss of encrypted data.
-- If you forget your password, there is no way to recover the encrypted data.
+### Method 1: [Community Plugins](https://obsidian.md/plugins?search=eccirian#) (Recommended) 
+
+1. Open Obsidian Settings
+2. Go **Community Plugins** → **Browse**
+3. Search for "**Eccirian Encrypt**"
+4. Click **Install** → **Enable**
+
+### Method 2: Manual Installation
+
+1. Download the latest release `release.zip` file from [GitHub Releases](https://github.com/Enthalpiex/eccirian-encrypt/releases)
+2. Extract the files to your vault's plugin directory:
+   ```
+   <your-vault>/.obsidian/plugins/eccirian-encrypt/
+   ```
+3. Reload Obsidian
+4. Enable the plugin in **Settings → Community Plugins**
 
 ---
 
-##  License
+## 🚀 Quick Start
 
-MPL-2.0 License © 2025 Entropiex
+### Basic
+
+**Temporary Mode** (Auto-decrypt on open)
+1. Open any note
+2. Click the lock icon in the ribbon, or use `Ctrl+P` → "Encrypt/Decrypt file"
+3. Enter a password
+4. Your note encrypted as `.eccirian`
+5. Click "Unlock" to decrypt back to `.md`
+
+**Permanent Mode** (Always encrypted)
+1. Go to **Settings → Eccirian Encrypt**
+2. Set **Default Encryption Mode** to "Permanent"
+3. Encrypt a note (same steps as above)
+4. File becomes `.peccirian` and requires password every time you open it
+
+
+### Commands
+
+**Convert to Markdown**
+- Converts `.peccirian` files to regular `.md` files
+- Use: `Ctrl+P` → "Convert to Markdown"
+- Or click the convert icon in the ribbon
+
+**Toggle File Extension**
+- Force conversion between `.md` and `.eccirian` extensions
+- Useful for creating encrypted views or fixing extension issues
+- Use: `Ctrl+P` → "Toggle file Extension"
+
+---
+
+## ⚠️ Important Notes
+
+- This plugin is designed for **personal use** and **reasonable security needs**
+- **Not recommended** for highly classified or mission-critical information
+- **Always backup** your vault before encrypting important files
+- **Remember your passwords** and there is **NO** recovery mechanism
+- The developer is not responsible for **any data loss**
+
+---
+
+## FAQ
+
+**Q: What happens if I forget my password?**  
+A: Unfortunately, there's no way to recover encrypted data without the password. This is by design for security.
+
+**Q: Can I use this with Sync?**  
+A: Yes. Encrypted files sync perfectly across devices. [Remotely Save](https://github.com/Enthalpiex/eccirian-encrypt/releaseshttps://github.com/remotely-save/remotely-save) is a great plugin to do this.
+
+**Q: Does attachment encryption work with Permanent mode?**  
+A: Currently only Temporary mode supports attachment encryption. Permanent mode support is coming in a future release.
+
+**Q: Are my passwords stored anywhere?**  
+A: No. Passwords are never stored. They're only used during encryption/decryption and immediately discarded.
+
+**Q: Can I encrypt folders?**  
+A: Not yet; but this feature is planned for a future release.
+
+---
+
+## Contributing & Support
+
+Contributions are welcome! Please feel free to: [GitHub Issues](https://github.com/Enthalpiex/eccirian-encrypt/issues)
+
+If you find this plugin helpful:
+- ⭐ Star the repo on [GitHub](https://github.com/Enthalpiex/eccirian-encrypt)
+- 🎁 Support development on [Aifadian](https://afdian.com/a/entropiex)
+- 📢 Share with others who might benefit
+
+
+**MPL-2.0 License** © 2025 [Entropiex](https://github.com/Enthalpiex)
+
