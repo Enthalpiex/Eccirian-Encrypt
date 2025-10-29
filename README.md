@@ -1,6 +1,6 @@
 <img alt="Eccirian_preview" src="https://github.com/user-attachments/assets/dfa58b45-0136-4b81-b29d-851cf82a3554" />
 
-# Eccirian Encrypt – Advanced Encryption for Obsidian
+# Eccirian Encrypt – Next-generation file encryption solution
 
 [![Version](https://img.shields.io/badge/version-0.9.8-blue.svg)](https://github.com/Enthalpiex/eccirian-encrypt/releases)
 [![License](https://img.shields.io/badge/license-MPL--2.0-green.svg)](LICENSE)
