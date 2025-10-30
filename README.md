@@ -3,7 +3,6 @@
 # Eccirian Encrypt – Next-generation file encryption solution
 
 [![Version](https://img.shields.io/badge/version-0.9.8-blue.svg)](https://github.com/Enthalpiex/eccirian-encrypt/releases)
-[![License](https://img.shields.io/badge/license-MPL--2.0-green.svg)](LICENSE)
 [![Obsidian](https://img.shields.io/badge/Obsidian-0.15.0+-purple.svg)](https://obsidian.md)
 
 [![Stars](https://img.shields.io/github/stars/Enthalpiex/eccirian-Encrypt?style=social)](https://github.com/Enthalpiex/eccirian-Encrypt/stargazers)
