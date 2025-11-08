@@ -8,9 +8,16 @@
 
 ---
 
-# Early Access 0.9.8
+> [!Caution]
+> - This plugin is designed for **personal use** and **reasonable security needs**
+> - **Not recommended** for highly classified or mission-critical information
+> - **Always backup** your vault before encrypting important files
+> - **Remember your passwords** and there is **NO** recovery mechanism
+> - The developer is not responsible for **any data loss**
 
-**Eccirian Encrypt** is a security-focused Obsidian plugin which provides seamless file encryption. The plugin adds file-level encryption and decryption capabilities to your vault, using AES-256-GCM and ECC-P-256 cryptographic encryption algorithms. By introduces custom file extensions and read-only view for locked files, allowing you to easily manage sensitive information directly in Obsidian. It is also the only plugin that supports one-click encryption of all link attachments.
+# Stable Release 1.0.0
+
+**Eccirian Encrypt** is a security-focused Obsidian plugin which provides safe and seamless file encryption. The plugin adds file-level encryption and decryption capabilities to your vault, using AES-256-GCM and ECC-P-256 cryptographic encryption algorithms. By introduces custom file extensions and read-only view for locked files, allowing you to easily manage sensitive information directly in Obsidian. It is also the only plugin that supports one-click encryption of all link attachments.
 
 ## Why Eccirian?
 
@@ -137,34 +144,25 @@ In addition:
 - Useful for creating encrypted views or fixing extension issues
 - Use: `Ctrl+P` → "Toggle file Extension"
 
----
-
-## ⚠️ Important Notes
-
-- This plugin is designed for **personal use** and **reasonable security needs**
-- **Not recommended** for highly classified or mission-critical information
-- **Always backup** your vault before encrypting important files
-- **Remember your passwords** and there is **NO** recovery mechanism
-- The developer is not responsible for **any data loss**
 
 ---
 
 ## FAQ
 
 **Q: What happens if I forget my password?**  
-A: Unfortunately, there's no way to recover encrypted data without the password. This is by design for security.
+A: Unfortunately, there's no way to recover encrypted data without the password.
 
 **Q: Can I use this with Sync?**  
 A: Yes. Encrypted files sync perfectly across devices. [Remotely Save](https://github.com/Enthalpiex/eccirian-encrypt/releaseshttps://github.com/remotely-save/remotely-save) is a great plugin to do this.
 
 **Q: Does attachment encryption work with Permanent mode?**  
-A: Currently only Temporary mode supports attachment encryption. Permanent mode support is coming in a future release.
+A: Yes. As of v1.0.0, both Temporary and Permanent modes support attachment encryption with different strategies.
 
 **Q: Are my passwords stored anywhere?**  
 A: No. Passwords are never stored. They're only used during encryption/decryption and immediately discarded.
 
 **Q: Can I encrypt folders?**  
-A: Not yet; but this feature is planned for a future release.
+A: Yes. Right-click any folder and select "Encrypt Folder" from the command palette. The entire folder structure is preserved.
 
 ---
 
@@ -179,4 +177,3 @@ If you find this plugin helpful:
 
 
 **MPL-2.0 License** © 2025 [Entropiex](https://github.com/Enthalpiex)
-
