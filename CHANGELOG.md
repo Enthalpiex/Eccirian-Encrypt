@@ -1,5 +1,37 @@
 # Changelog
 
+## [1.0.0] - 2025-11-07
+
+- Core Features
+	- Implemented `.peccfile` extension for permanently encrypted attachments
+	- In-memory decryption architecture for `.peccirian` files
+	- Convert to Markdown support with attachment decryption and link updates
+	- Fixed `encryptionMode` parameter propagation from `PasswordModal` to encryption callbacks
+	- Encryption mode selection in password dialog applied to file and attachments
+	- Password hint support for encrypted folders
+	- Overwrite confirmation dialog when decrypting to existing folder path
+	- Consistent UX with file encryption workflows
+
+- Technical Implementation
+	- `AttachmentHelper.encryptBinaryFile()` accepts `type: "temporary" | "permanent"` parameter
+	- `AttachmentHelper.updateAttachmentLinks()` bidirectional link transformation
+	- `PEccidianView.save()` updates links without re-encrypting attachments
+	- `PEccidianView.handlePasswordInput()` updates links without decrypting attachments
+	- `PEccidianView.onunload()` null safety check before final save
+	- `PasswordModal.onSuccess` extended callback with `encryptionMode` parameter
+	- `EccEncryptPlugin.handleEncryptDecrypt()` unified method for ribbon and command palette
+
+- Code Quality Improvements
+	- Eliminated code duplication in encryption/decryption workflow
+	- Enhanced null safety in async operations
+
+- Bug Fixes
+	- **Fixed attachment extension mismatch** - Permanent mode now correctly uses `.peccfile` instead of `.eccfile`
+	- **Fixed Convert to Markdown link cleanup** - Properly removes `.peccfile` extension from links in converted markdown files
+	- **Fixed encryption mode propagation** - Selection in password dialog could applies to attachment encryption correctly
+	- **Fixed null reference error in save operations** - Additional null checks are added to prevent `Cannot read properties of null (reading 'saving')` error during async operations
+	- **Fixed race condition**: File reference is validated before `vault.modify()` calls to handle cases where file is closed during encryption
+ 
 
 ## [0.9.8] - 2025-10-28
 
