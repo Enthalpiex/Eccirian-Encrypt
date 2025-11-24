@@ -1,6 +1,12 @@
 # Changelog
 
-# 
+## [1.0.3] - 2025-11-24
+
+- Fixed attachment encryption links breaking due to unhandled spaces, encoded paths, and query params. 
+
+- Preventing broken images.
+
+- Fixed folder unlock logic. Restores to safe paths `Name (Restored)` without overwriting.
 
 ## [1.0.2] - 2025-11-10
 
@@ -120,5 +126,3 @@
 ## [0.1.0] - 2025-04-16
 
 - Initial release for Eccirian Encrypt
-
-
