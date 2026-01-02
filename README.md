@@ -9,6 +9,7 @@
 ---
 
 > [!Caution]
+> 
 > - This plugin is designed for **personal use** and **reasonable security needs**
 > - **Not recommended** for highly classified or mission-critical information
 > - **Always backup** your vault before encrypting important files
@@ -22,22 +23,26 @@
 ## Why Eccirian?
 
 ### Attachment Encryption
+
 Unlike other encryption plugins that only encrypt note content, Eccirian can **encrypt your attachments** (images, PDFs, documents) alongside your notes.
 
 ### Lightning Fast
+
 Zero performance overhead. Encryption and decryption both utilize the browser's native Web Crypto API `crypto.subtle` for hardware-accelerated AES-GCM operations. Key derivation meets OWASP's minimum security requirements without sacrificing speed by useing the `PBKDF2` algorithm.
 
 ### Flexible Mode Switching
+
 - **Temporary Mode** (`.eccirian`) - One-time password, auto-decrypt on open
 - **Permanent Mode** (`.peccirian`) - Persistent encryption, password are required every time
 
 ### **Maximum Security**
+
 - **AES-256-GCM** - Industry standard symmetric encryption
 - **ECC + AES** - Hybrid encryption for maximum security
 
 ---
 
-##  Features
+## Features
 
 Compared to similar plugins (e.x. *[Meld Encrypt](https://github.com/meld-cp/obsidian-encrypt)*), eccirian offers:
 
@@ -52,37 +57,37 @@ Compared to similar plugins (e.x. *[Meld Encrypt](https://github.com/meld-cp/obs
 
 ---
 
-
 ## Compare
 
-| Feature | Eccirian Encrypt | Meld Encrypt | Other Plugins |
-|---------|------------------|--------------|---------------|
-| **Attachment Encryption** | ✅ Yes | ❌ No | ❌ No |
-| **Lock Screen View** | ✅ Yes | ❌ No | ❌ No |
-| **Super Compatibility** | ✅ Yes | ❌ No | ⚠️ Varies |
-| **Multiple Algorithms** | ✅ AES + ECC | ⚠️ AES | ⚠️ Varies |
-| **Temporary Encryption** | ✅ Yes | ❌ No | ❌ No |
-| **Performance** | ⚡ Instant | ✅ Normal | ⚠️ Varies |
-| **Cloud Sync Friendly** | ✅ Yes | ✅ Yes | ⚠️ Varies |
+| Feature                   | Eccirian Encrypt | Meld Encrypt | Other Plugins |
+| ------------------------- | ---------------- | ------------ | ------------- |
+| **Attachment Encryption** | ✅ Yes            | ❌ No         | ❌ No          |
+| **Lock Screen View**      | ✅ Yes            | ❌ No         | ❌ No          |
+| **Super Compatibility**   | ✅ Yes            | ❌ No         | ⚠️ Varies     |
+| **Multiple Algorithms**   | ✅ AES + ECC      | ⚠️ AES       | ⚠️ Varies     |
+| **Temporary Encryption**  | ✅ Yes            | ❌ No         | ❌ No          |
+| **Performance**           | ⚡ Instant        | ✅ Normal     | ⚠️ Varies     |
+| **Cloud Sync Friendly**   | ✅ Yes            | ✅ Yes        | ⚠️ Varies     |
 
 ---
 
 ## Security & Encryption Algorithms
 
 **1. AES-256-GCM (Default)**
- - 256-bit key length
- - Galois/Counter Mode (GCM) for authenticated encryption
- - PBKDF2 key derivation with 100,000 iterations
- - SHA-256 hash function
- - 16-byte random salt per encryption
- - 12-byte initialization vector (IV)
+
+- 256-bit key length
+- Galois/Counter Mode (GCM) for authenticated encryption
+- PBKDF2 1,000,000 iterations or Argon2id key derivation
+- SHA-256 hash function
+- 16-byte random salt per encryption
+- 12-byte initialization vector (IV)
 
 **2. ECC + AES (Advanced)**
 
- - P-256 elliptic curve (secp256r1)
- - ECDH key exchange for key agreement
- - Combined with AES-256-GCM for data encryption
- - Same PBKDF2 parameters as AES method
+- P-256 elliptic curve (secp256r1)
+- ECDH key exchange for key agreement
+- Combined with AES-256-GCM for data encryption
+- Same PBKDF2 parameters as AES method
 
 In addition:
 
@@ -95,7 +100,7 @@ In addition:
 
 ## 📦 Installation
 
-### Method 1: [Community Plugins](https://obsidian.md/plugins?search=eccirian#) (Recommended) 
+### Method 1: [Community Plugins](https://obsidian.md/plugins?search=eccirian#) (Recommended)
 
 1. Open Obsidian Settings
 2. Go **Community Plugins** → **Browse**
@@ -105,11 +110,15 @@ In addition:
 ### Method 2: Manual Installation
 
 1. Download the latest release `release.zip` file from [GitHub Releases](https://github.com/Enthalpiex/eccirian-encrypt/releases)
+
 2. Extract the files to your vault's plugin directory:
+   
    ```
    <your-vault>/.obsidian/plugins/eccirian-encrypt/
    ```
+
 3. Reload Obsidian
+
 4. Enable the plugin in **Settings → Community Plugins**
 
 ---
@@ -119,6 +128,7 @@ In addition:
 ### Basic
 
 **Temporary Mode** (Auto-decrypt on open)
+
 1. Open any note
 2. Click the lock icon in the ribbon, or use `Ctrl+P` → "Encrypt/Decrypt file"
 3. Enter a password
@@ -126,24 +136,25 @@ In addition:
 5. Click "Unlock" to decrypt back to `.md`
 
 **Permanent Mode** (Always encrypted)
+
 1. Go to **Settings → Eccirian Encrypt**
 2. Set **Default Encryption Mode** to "Permanent"
 3. Encrypt a note (same steps as above)
 4. File becomes `.peccirian` and requires password every time you open it
 
-
 ### Commands
 
 **Convert to Markdown**
+
 - Converts `.peccirian` files to regular `.md` files
 - Use: `Ctrl+P` → "Convert to Markdown"
 - Or click the convert icon in the ribbon
 
 **Toggle File Extension**
+
 - Force conversion between `.md` and `.eccirian` extensions
 - Useful for creating encrypted views or fixing extension issues
 - Use: `Ctrl+P` → "Toggle file Extension"
-
 
 ---
 
@@ -171,9 +182,9 @@ A: Yes. Right-click any folder and select "Encrypt Folder" from the command pale
 Contributions are welcome! Please feel free to: [GitHub Issues](https://github.com/Enthalpiex/eccirian-encrypt/issues)
 
 If you find this plugin helpful:
+
 - ⭐ Star the repo on [GitHub](https://github.com/Enthalpiex/eccirian-encrypt)
 - 🎁 Support development on [Aifadian](https://afdian.com/a/entropiex)
 - 📢 Share with others who might benefit
-
 
 **MPL-2.0 License** © 2025 [Entropiex](https://github.com/Enthalpiex)
