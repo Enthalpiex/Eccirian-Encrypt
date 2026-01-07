@@ -1,3 +1,6 @@
+> [!Caution]
+> Version 1.0.6 had a vulnerability that could cause notes to be lost; this issue is being fixed. Please avoid using this version in the near future or revert to an earlier version.
+
 <img alt="Eccirian_preview" src="https://github.com/user-attachments/assets/dfa58b45-0136-4b81-b29d-851cf82a3554" />
 
 # Eccirian Encrypt – Next-generation file encryption solution
