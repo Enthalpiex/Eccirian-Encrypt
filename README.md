@@ -167,7 +167,7 @@ In addition:
 A: Unfortunately, there's no way to recover encrypted data without the password.
 
 **Q: Can I use this with Sync?**  
-A: Yes. Encrypted files sync perfectly across devices. [Remotely Save](https://github.com/Enthalpiex/eccirian-encrypt/releaseshttps://github.com/remotely-save/remotely-save) is a great plugin to do this.
+A: Yes. Encrypted files sync perfectly across devices. [Remotely Save](https://github.com/remotely-save/remotely-save) is a great plugin to do this.
 
 **Q: Does attachment encryption work with Permanent mode?**  
 A: Yes. As of v1.0.0, both Temporary and Permanent modes support attachment encryption with different strategies.
