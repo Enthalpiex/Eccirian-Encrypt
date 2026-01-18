@@ -1,5 +1,5 @@
 > [!Caution]
-> Version 1.0.6 had a vulnerability that could cause notes to be lost; this issue is being fixed. Please update to newest version.
+> Version 1.0.6 had a vulnerability that could cause notes to be lost. Please update to newest version.
 
 <img alt="Eccirian_preview" src="https://github.com/user-attachments/assets/dfa58b45-0136-4b81-b29d-851cf82a3554" />
 
