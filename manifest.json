@@ -1,7 +1,7 @@
 {
 	"id": "eccirian",
 	"name": "Eccirian Encrypt",
-	"version": "1.0.8",
+	"version": "1.0.9",
 	"minAppVersion": "0.15.0",
 	"description": "Next-generation file encryption solution based on modern cryptography.",
 	"author": "Entropiex",
