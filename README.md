@@ -13,13 +13,11 @@
 
 > [!Caution]
 > 
-> - This plugin is designed for **personal use** and **reasonable security needs**
-> - **Not recommended** for highly classified or mission-critical information
-> - **Always backup** your vault before encrypting important files
-> - **Remember your passwords** and there is **NO** recovery mechanism
-> - The developer is not responsible for **any data loss**
-
-# Stable Release 1.0.0
+> - This plugin is designed for personal use and reasonable security needs
+> - Not recommended for highly classified or mission-critical information
+> - Always backup your vault before encrypting important files
+> - The developer is not responsible for any data loss
+> - Losing the password means losing the file
 
 **Eccirian Encrypt** is a security-focused Obsidian plugin which provides safe and seamless file encryption. The plugin adds file-level encryption and decryption capabilities to your vault, using AES-256-GCM and ECC-P-256 cryptographic encryption algorithms. By introduces custom file extensions and read-only view for locked files, allowing you to easily manage sensitive information directly in Obsidian. It is also the only plugin that supports one-click encryption of all link attachments.
 
@@ -57,6 +55,8 @@ Compared to similar plugins (e.x. *[Meld Encrypt](https://github.com/meld-cp/obs
 - 🖼️**Super Compatibility** - Full compatibility with all hover preview and editing plugins
 - ⚙️ **Hardware Acceleration** - Supports hardware-accelerated encryption and decryption
 - ☁️ **Cloud-sync friendly** - Encrypted files work seamlessly with sync services
+
+However, we currently have no plans for multi-platform support, meaning it may have bugs on platforms other than Windows and Mac. If this bothers you, please use Meld.
 
 ---
 
