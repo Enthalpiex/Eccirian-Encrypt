@@ -1,4 +1,4 @@
-<img width="3394" height="873" alt="Eccirian - REF-trans" src="https://github.com/user-attachments/assets/0f14c07f-6418-4322-ab23-b6ba15439495" />
+<img alt="Eccirian - REF-trans" src="https://github.com/user-attachments/assets/0f14c07f-6418-4322-ab23-b6ba15439495" />
 
 
 ---
