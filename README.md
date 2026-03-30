@@ -53,13 +53,14 @@ Compared to similar plugins (e.x. *[Meld Encrypt](https://github.com/meld-cp/obs
 
 | Feature                   | Eccirian Encrypt | Meld Encrypt | Other Plugins |
 | ------------------------- | ---------------- | ------------ | ------------- |
-| **Attachment Encryption** | ✅ Yes            | ❌ No         | ❌ No          |
-| **Lock Screen View**      | ✅ Yes            | ❌ No         | ❌ No          |
+| **Attachment Encryption** | ✅ Yes            | ❌ No         | ❌ No         |
+| **Lock Screen View**      | ✅ Yes            | ❌ No         | ❌ No         |
 | **Super Compatibility**   | ✅ Yes            | ❌ No         | ⚠️ Varies     |
-| **Multiple Algorithms**   | ✅ AES + ECC      | ⚠️ AES       | ⚠️ Varies     |
-| **Temporary Encryption**  | ✅ Yes            | ❌ No         | ❌ No          |
-| **Performance**           | ⚡ Instant        | ✅ Normal     | ⚠️ Varies     |
+| **Multiple Algorithms**   | ✅ AES + ECC      | ⚠️ AES        | ⚠️ Varies     |
+| **Temporary Encryption**  | ✅ Yes            | ❌ No         | ❌ No         |
+| **Performance**           | ⚡ Instant        | ✅ Fast       | ⚠️ Varies     |
 | **Cloud Sync Friendly**   | ✅ Yes            | ✅ Yes        | ⚠️ Varies     |
+| **Multi-platform**        | ⚠️ Win + Mac      | ✅ Yes        | ⚠️ Varies     | 
 
 However, we currently have no plans for multi-platform support, meaning it may have bugs on platforms other than Windows and Mac. If this bothers you, please use Meld.
 
