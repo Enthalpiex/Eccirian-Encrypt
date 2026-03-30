@@ -1,7 +1,7 @@
 {
 	"name": "eccirian-encrypt",
-	"version": "0.9.8",
-	"description": "Next-generation file encryption solution based on modern cryptography.",
+	"version": "1.0.10",
+	"description": "Next-generation file encryption based on modern cryptography.",
 	"main": "main.js",
 	"scripts": {
 		"dev": "node esbuild.config.mjs",
@@ -40,6 +40,7 @@
 	},
 	"dependencies": {
 		"crypto-js": "^4.2.0",
-		"tweetnacl": "^1.0.3"
+		"tweetnacl": "^1.0.3",
+		"argon2-browser": "^1.18.0"
 	}
 }
