@@ -1,6 +1,4 @@
-<img alt="Eccirian_preview" src="https://github.com/user-attachments/assets/dfa58b45-0136-4b81-b29d-851cf82a3554" />
-
-# Next-generation file encryption solution
+<img width="3394" height="873" alt="Eccirian - REF-trans" src="https://github.com/user-attachments/assets/0f14c07f-6418-4322-ab23-b6ba15439495" />
 
 [![Obsidian](https://img.shields.io/badge/Obsidian-0.15.0+-purple.svg)](https://obsidian.md) [![Stars](https://img.shields.io/github/stars/Enthalpiex/eccirian-Encrypt?style=social)](https://github.com/Enthalpiex/eccirian-Encrypt/stargazers)
 
@@ -15,6 +13,8 @@
 > - Always backup your vault before encrypting important files
 > - The developer is not responsible for any data loss
 > - Losing the password means losing the file
+
+## Next-generation file encryption solution
 
 **Eccirian Encrypt** is a security-focused Obsidian plugin which provides safe and seamless file encryption. The plugin adds file-level encryption and decryption capabilities to your vault, using AES-256-GCM and ECC-P-256 cryptographic encryption algorithms. By introduces custom file extensions and read-only view for locked files, allowing you to easily manage sensitive information directly in Obsidian. It is also the only plugin that supports one-click encryption of all link attachments.
 
