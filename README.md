@@ -23,7 +23,7 @@
 ![Demo](https://github.com/user-attachments/assets/d8fe356c-e66e-41c8-8b44-2eb7f93095c2)
 
 
-## Why Eccirian?
+## Features
 
 ### Attachment Encryption
 
@@ -38,14 +38,7 @@ Zero performance overhead. Encryption and decryption both utilize the browser's 
 - **Temporary Mode** (`.eccirian`) - One-time password, auto-decrypt on open
 - **Permanent Mode** (`.peccirian`) - Persistent encryption, password are required every time
 
-### **Maximum Security**
-
-- **AES-256-GCM** - Industry standard symmetric encryption
-- **ECC + AES** - Hybrid encryption for maximum security
-
 ---
-
-## Features
 
 Compared to similar plugins (e.x. *[Meld Encrypt](https://github.com/meld-cp/obsidian-encrypt)*), eccirian offers:
 
@@ -58,12 +51,6 @@ Compared to similar plugins (e.x. *[Meld Encrypt](https://github.com/meld-cp/obs
 - ⚙️ **Hardware Acceleration** - Supports hardware-accelerated encryption and decryption
 - ☁️ **Cloud-sync friendly** - Encrypted files work seamlessly with sync services
 
-However, we currently have no plans for multi-platform support, meaning it may have bugs on platforms other than Windows and Mac. If this bothers you, please use Meld.
-
----
-
-## Compare
-
 | Feature                   | Eccirian Encrypt | Meld Encrypt | Other Plugins |
 | ------------------------- | ---------------- | ------------ | ------------- |
 | **Attachment Encryption** | ✅ Yes            | ❌ No         | ❌ No          |
@@ -73,6 +60,8 @@ However, we currently have no plans for multi-platform support, meaning it may h
 | **Temporary Encryption**  | ✅ Yes            | ❌ No         | ❌ No          |
 | **Performance**           | ⚡ Instant        | ✅ Normal     | ⚠️ Varies     |
 | **Cloud Sync Friendly**   | ✅ Yes            | ✅ Yes        | ⚠️ Varies     |
+
+However, we currently have no plans for multi-platform support, meaning it may have bugs on platforms other than Windows and Mac. If this bothers you, please use Meld.
 
 ---
 
