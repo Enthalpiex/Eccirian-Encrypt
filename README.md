@@ -26,88 +26,69 @@
 
 ## Features
 
-### Attachment Encryption
+Eccirian Encrypt provides file-level encryption inside Obsidian.
 
-Unlike other encryption plugins that only encrypt note content, Eccirian can **encrypt your attachments** (images, PDFs, documents) alongside your notes.
+- Encrypt notes and linked attachments together
+- Two file modes:
+   - Temporary mode (`.eccirian`): unlock once, then edit normally
+   - Permanent mode (`.peccirian`): stays encrypted on disk and asks for password when opened
+- Works with common file types, not only `.md`
+- Includes a read-only view for locked files
+- Uses Web Crypto API (`crypto.subtle`) for AES operations
 
-### Lightning Fast
-
-Zero performance overhead. Encryption and decryption both utilize the browser's native Web Crypto API `crypto.subtle` for hardware-accelerated AES-GCM operations. Key derivation meets OWASP's minimum security requirements without sacrificing speed by useing the `PBKDF2` algorithm.
-
-### Flexible Mode Switching
-
-- **Temporary Mode** (`.eccirian`) - One-time password, auto-decrypt on open
-- **Permanent Mode** (`.peccirian`) - Persistent encryption, password are required every time
-
----
-
-Compared to similar plugins (e.x. *[Meld Encrypt](https://github.com/meld-cp/obsidian-encrypt)*), eccirian offers:
-
-- ⚡ **Low Performance Overhead** - Encryption and decryption happen instantly with no noticeable lag
-- 🧩 **Composite Encryption methods** - Optional hybrid Elliptic Curve Cryptography asymmetric encryption
-- 🔐 **Flexible Mode Switching** - Protect both your markdown files and linked attachments
-- 📁 **Any File Type** - Not limited to `.md` files, encrypt any file format
-- 🎨 **Customized Lock Screen** - Custom read-only view for encrypted files
-- 🖼️**Super Compatibility** - Full compatibility with all hover preview and editing plugins
-- ⚙️ **Hardware Acceleration** - Supports hardware-accelerated encryption and decryption
-- ☁️ **Cloud-sync friendly** - Encrypted files work seamlessly with sync services
-
-| Feature                   | Eccirian Encrypt | Meld Encrypt | Other Plugins |
-| ------------------------- | ---------------- | ------------ | ------------- |
-| **Attachment Encryption** | ✅ Yes            | ❌ No         | ❌ No         |
-| **Lock Screen View**      | ✅ Yes            | ❌ No         | ❌ No         |
-| **Super Compatibility**   | ✅ Yes            | ❌ No         | ⚠️ Varies     |
-| **Multiple Algorithms**   | ✅ AES + ECC      | ⚠️ AES        | ⚠️ Varies     |
-| **Temporary Encryption**  | ✅ Yes            | ❌ No         | ❌ No         |
-| **Performance**           | ⚡ Instant        | ✅ Fast       | ⚠️ Varies     |
-| **Cloud Sync Friendly**   | ✅ Yes            | ✅ Yes        | ⚠️ Varies     |
-| **Multi-platform**        | ⚠️ Win + Mac      | ✅ Yes        | ⚠️ Varies     | 
-
-However, we currently have no plans for multi-platform support, meaning it may have bugs on platforms other than Windows and Mac. If this bothers you, please use Meld.
+Current platform support is focused on Windows and macOS.
 
 ---
 
 ## Security & Encryption Algorithms
 
-**1. AES-256-GCM (Default)**
+### AES-256-GCM (Default)
 
-- 256-bit key length
-- Galois/Counter Mode (GCM) for authenticated encryption
-- PBKDF2 1,000,000 iterations or Argon2id key derivation
-- SHA-256 hash function
-- 16-byte random salt per encryption
-- 12-byte initialization vector (IV)
+- 256-bit key
+- GCM authenticated encryption
+- SHA-256
+- 16-byte random salt
+- 12-byte IV
 
-**2. ECC + AES (Advanced)**
+### ECC + AES (Advanced)
 
-- P-256 elliptic curve (secp256r1)
-- ECDH key exchange for key agreement
-- Combined with AES-256-GCM for data encryption
-- Same PBKDF2 parameters as AES method
+- Curve: P-256 (`secp256r1`)
+- ECDH key exchange
+- AES-256-GCM for final data encryption
 
-In addition:
+### Key Derivation
 
-- **Password Protection** - Passwords are never saved anywhere
-- **Unique Salts** - Each encryption uses a fresh random salt
-- **Authenticated Encryption** - GCM mode prevents tampering
-- **Memory-only Decryption** - Permanent mode files stay encrypted on disk
+Both encryption methods support configurable key derivation functions:
+
+- **PBKDF2**: 1,000,000 iterations (compatible, configurable)
+- **Argon2id**: Memory-hard, time-cost and memory-cost configurable
+
+Configurable parameters allow you to adjust security vs. performance tradeoff based on your device and needs.
+
+### Additional Features
+
+- **Key caching**: Decrypted keys can be cached temporarily to reduce re-entry of passwords for repeated operations
+- **Passwords not stored**: Passwords are only used during encryption/decryption and immediately discarded
+- **Unique salts**: Each encryption generates a fresh random salt
+- **Authenticated encryption**: GCM mode provides integrity verification
+- **Disk security**: Permanent mode keeps encrypted content on disk
 
 ---
 
 ## 📦 Installation
 
-### Method 1: [Community Plugins](https://obsidian.md/plugins?search=eccirian#) (Recommended)
+### [Community Plugins](https://obsidian.md/plugins?search=eccirian#) (Recommended)
 
 1. Open Obsidian Settings
 2. Go **Community Plugins** → **Browse**
-3. Search for "**Eccirian Encrypt**"
+3. Search for **Eccirian Encrypt**
 4. Click **Install** → **Enable**
 
-### Method 2: Manual Installation
+### Manual Installation
 
-1. Download the latest release `release.zip` file from [GitHub Releases](https://github.com/Enthalpiex/eccirian-encrypt/releases)
+1. Download the latest `release.zip` from [GitHub Releases](https://github.com/Enthalpiex/eccirian-encrypt/releases)
 
-2. Extract the files to your vault's plugin directory:
+2. Extract into:
    
    ```
    <your-vault>/.obsidian/plugins/eccirian-encrypt/
@@ -119,68 +100,61 @@ In addition:
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
-### Basic
+### Encrypt or Decrypt One File
 
-**Temporary Mode** (Auto-decrypt on open)
+1. Open a note
+2. Use ribbon lock icon, or `Ctrl+P` → "Encrypt/Decrypt file"
+3. Enter password
+4. File will be converted to `.eccirian` or `.peccirian` based on current mode
 
-1. Open any note
-2. Click the lock icon in the ribbon, or use `Ctrl+P` → "Encrypt/Decrypt file"
-3. Enter a password
-4. Your note encrypted as `.eccirian`
-5. Click "Unlock" to decrypt back to `.md`
-
-**Permanent Mode** (Always encrypted)
+### Set Default Mode
 
 1. Go to **Settings → Eccirian Encrypt**
-2. Set **Default Encryption Mode** to "Permanent"
-3. Encrypt a note (same steps as above)
-4. File becomes `.peccirian` and requires password every time you open it
+2. Choose **Default Encryption Mode**
 
 ### Commands
 
-**Convert to Markdown**
-
-- Converts `.peccirian` files to regular `.md` files
-- Use: `Ctrl+P` → "Convert to Markdown"
-- Or click the convert icon in the ribbon
-
-**Toggle File Extension**
-
-- Force conversion between `.md` and `.eccirian` extensions
-- Useful for creating encrypted views or fixing extension issues
-- Use: `Ctrl+P` → "Toggle file Extension"
+- `Convert to Markdown`: `.peccirian` to `.md`
+- `Toggle file Extension`: switch `.md` and `.eccirian`
+- `Encrypt Folder`: encrypt files in a folder while preserving structure
 
 ---
 
 ## FAQ
 
 **Q: What happens if I forget my password?**  
-A: Unfortunately, there's no way to recover encrypted data without the password.
+A: Data cannot be recovered without the password.
 
 **Q: Can I use this with Sync?**  
-A: Yes. Encrypted files sync perfectly across devices. [Remotely Save](https://github.com/remotely-save/remotely-save) is a great plugin to do this.
+A: Yes. Encrypted files can be synced like other files.
 
 **Q: Does attachment encryption work with Permanent mode?**  
-A: Yes. As of v1.0.0, both Temporary and Permanent modes support attachment encryption with different strategies.
+A: Yes.
 
 **Q: Are my passwords stored anywhere?**  
-A: No. Passwords are never stored. They're only used during encryption/decryption and immediately discarded.
+A: No.
 
 **Q: Can I encrypt folders?**  
-A: Yes. Right-click any folder and select "Encrypt Folder" from the command palette. The entire folder structure is preserved.
+A: Yes. Use the folder encryption command from the context menu or command palette.
+
+**Q: How is this different from other encryption plugins like Meld Encrypt?**  
+A: Main differences:
+- **Attachment encryption**: This plugin encrypts linked files (images, PDFs, docs) alongside notes. Other plugins typically only encrypt note content.
+- **Two persistent modes**: Permanent mode keeps files encrypted on disk and requires password each time. Temporary mode encrypts but auto-decrypts on open.
+- **File type flexibility**: Works with any file format, not limited to `.md`.
+- **Lock screen**: Provides a custom read-only interface for encrypted files. The password input box will not be triggered when using the mouse hover preview.
+- **Encryption methods**: Supports both AES-256-GCM and optional ECC hybrid encryption.
+- **Configurable KDF**: Both AES and ECC modes support PBKDF2 and Argon2id with adjustable parameters for flexible security/performance tradeoff.
+- **Key caching**: Can cache decrypted keys temporarily to avoid repeated password prompts during batch operations.
+- **Platform**: Currently Windows and macOS only. Meld Encrypt has broader platform support.
 
 ---
 
-## Contributing & Support
+## Contributing
 
-Contributions are welcome! Please feel free to: [GitHub Issues](https://github.com/Enthalpiex/eccirian-encrypt/issues)
+Issues and pull requests are welcome:
+[GitHub Issues](https://github.com/Enthalpiex/eccirian-encrypt/issues)
 
-If you find this plugin helpful:
-
-- ⭐ Star the repo on [GitHub](https://github.com/Enthalpiex/eccirian-encrypt)
-- 🎁 Support development on [Aifadian](https://afdian.com/a/entropiex)
-- 📢 Share with others who might benefit
-
-**MPL-2.0 License** © 2025 [Entropiex](https://github.com/Enthalpiex)
+**MPL-2.0 License** © 2026 [Entropiex](https://github.com/Enthalpiex)
