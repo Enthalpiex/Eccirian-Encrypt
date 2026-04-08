@@ -1,6 +1,6 @@
 {
 	"name": "eccirian-encrypt",
-	"version": "1.0.11",
+	"version": "1.0.12",
 	"description": "Next-generation file encryption based on modern cryptography.",
 	"main": "main.js",
 	"scripts": {
