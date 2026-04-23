@@ -75,14 +75,9 @@ Current platform support is focused on Windows and macOS.
 ### Encrypt or Decrypt One File
 
 1. Open a note
-2. Use ribbon lock icon, or `Ctrl+P` → "Encrypt/Decrypt file"
+2. Use ribbon lock icon, or `Ctrl+P` → "Encrypt / Decrypt file"
 3. Enter password
 4. File will be converted to `.eccirian` or `.peccirian` based on current mode
-
-### Set Default Mode
-
-1. Go to **Settings → Eccirian Encrypt**
-2. Choose **Default Encryption Mode**
 
 ### Commands
 
