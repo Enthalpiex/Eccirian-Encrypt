@@ -41,7 +41,7 @@ Current platform support is focused on Windows and macOS.
 
 ## Security & Encryption Algorithms
 
-<img alt="security" src="https://github.com/user-attachments/assets/18d2bb7a-e49d-4569-be59-11baa5a375d2" />
+<img alt="security" src="https://github.com/user-attachments/assets/0c2f0f7a-21fb-4669-ae98-4e07266ae3b2" />
 
 ---
 
