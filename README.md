@@ -34,6 +34,7 @@ Eccirian Encrypt provides file-level encryption inside Obsidian.
 - Works with common file types, not only `.md`
 - Includes a read-only view for locked files
 - Uses Web Crypto API (`crypto.subtle`) for AES operations
+- Configurable PBKDF2 and Argon2id compliant with OWASP2023 standards
 
 Current platform support is focused on Windows and macOS.
 
