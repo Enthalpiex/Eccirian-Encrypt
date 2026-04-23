@@ -41,36 +41,8 @@ Current platform support is focused on Windows and macOS.
 
 ## Security & Encryption Algorithms
 
-### AES-256-GCM (Default)
+<img width="1655" height="1069" alt="Drawing 2026-04-22 18 27 10 excalidraw" src="https://github.com/user-attachments/assets/9c6e19a7-27bb-4d59-b16b-844ba4aecc07" />
 
-- 256-bit key
-- GCM authenticated encryption
-- SHA-256
-- 16-byte random salt
-- 12-byte IV
-
-### ECC + AES (Advanced)
-
-- Curve: P-256 (`secp256r1`)
-- ECDH key exchange
-- AES-256-GCM for final data encryption
-
-### Key Derivation
-
-Both encryption methods support configurable key derivation functions:
-
-- **PBKDF2**: 1,000,000 iterations (compatible, configurable)
-- **Argon2id**: Memory-hard, time-cost and memory-cost configurable
-
-Configurable parameters allow you to adjust security vs. performance tradeoff based on your device and needs.
-
-### Additional Features
-
-- **Key caching**: Decrypted keys can be cached temporarily to reduce re-entry of passwords for repeated operations
-- **Passwords not stored**: Passwords are only used during encryption/decryption and immediately discarded
-- **Unique salts**: Each encryption generates a fresh random salt
-- **Authenticated encryption**: GCM mode provides integrity verification
-- **Disk security**: Permanent mode keeps encrypted content on disk
 
 ---
 
