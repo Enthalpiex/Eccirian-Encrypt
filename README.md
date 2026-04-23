@@ -41,8 +41,7 @@ Current platform support is focused on Windows and macOS.
 
 ## Security & Encryption Algorithms
 
-<img alt="Drawing 2026-04-22 18 27 10 excalidraw" src="https://github.com/user-attachments/assets/9c6e19a7-27bb-4d59-b16b-844ba4aecc07" />
-
+<img alt="security" src="https://github.com/user-attachments/assets/18d2bb7a-e49d-4569-be59-11baa5a375d2" />
 
 ---
 
