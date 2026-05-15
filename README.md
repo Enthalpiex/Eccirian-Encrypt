@@ -114,7 +114,6 @@ A: Main differences:
 - **Encryption methods**: Supports both AES-256-GCM and optional ECC hybrid encryption.
 - **Configurable KDF**: Both AES and ECC modes support PBKDF2 and Argon2id with adjustable parameters for flexible security/performance tradeoff.
 - **Key caching**: Can cache decrypted keys temporarily to avoid repeated password prompts during batch operations.
-- **Platform**: Currently Windows and macOS only. Meld Encrypt has broader platform support.
 
 ---
 
