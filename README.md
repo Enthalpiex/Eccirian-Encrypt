@@ -18,14 +18,14 @@
 
 ## Next-generation file encryption solution
 
-**Eccirian Encrypt** is a security-focused Obsidian plugin which provides safe and seamless file encryption. The plugin adds file-level encryption and decryption capabilities to your vault, using AES-256-GCM and ECC-P-256 cryptographic encryption algorithms. By introduces custom file extensions and read-only view for locked files, allowing you to easily manage sensitive information directly in Obsidian. It is also the only plugin that supports one-click encryption of all link attachments.
+**Eccirian Encrypt** is a security-focused Obsidian plugin which provides safe and seamless file encryption. The plugin uses AES-256-GCM and ECC-P-256 algorithms, and introduces custom file extensions and read-only view for locked files, allowing you to easily manage sensitive information directly in Obsidian. It is also the only plugin (so far) that supports one-click encryption of all link attachments.
 
 ![Demo](https://github.com/user-attachments/assets/d8fe356c-e66e-41c8-8b44-2eb7f93095c2)
 
 
 ## Features
 
-Eccirian Encrypt provides file-level encryption inside Obsidian.
+You could:
 
 - Encrypt notes and linked attachments together
 - Two file modes:
@@ -35,8 +35,8 @@ Eccirian Encrypt provides file-level encryption inside Obsidian.
 - Includes a read-only view for locked files
 - Uses Web Crypto API (`crypto.subtle`) for AES operations
 - Configurable PBKDF2 and Argon2id compliant with OWASP2023 standards
-
-Current platform support is focused on Windows and macOS.
+- Preview medias in Permanent mode editor
+- Desktop and mobile devices support 
 
 ---
 
