@@ -7,6 +7,8 @@
 		"dev": "node esbuild.config.mjs",
 		"build": "node esbuild.config.mjs production",
 		"typecheck": "tsc -noEmit -skipLibCheck",
+		"lint": "eslint .",
+		"lint:fix": "eslint . --fix",
 		"version": "node version-bump.mjs && git add manifest.json versions.json"
 	},
 	"keywords": [
@@ -30,6 +32,7 @@
 	"author": "Entropiex",
 	"license": "MPL-2.0",
 	"devDependencies": {
+		"@eslint/js": "^9.39.4",
 		"@types/node": "^16.11.6",
 		"@typescript-eslint/parser": "^8.59.3",
 		"esbuild": "0.17.3",
@@ -41,7 +44,7 @@
 		"typescript-eslint": "^8.0.0"
 	},
 	"dependencies": {
-		"argon2-browser": "^1.18.0",
-		"tweetnacl": "^1.0.3"
+		"argon2-browser": "1.18.0",
+		"tweetnacl": "1.0.3"
 	}
 }

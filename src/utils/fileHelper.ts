@@ -25,7 +25,7 @@ export async function changeFileExtension(vault: Vault, file: TFile, newExt: str
     newPath
   });*/
 
-  const result = await vault.rename(file, newPath);
+  await vault.rename(file, newPath);
   /*console.log("Rename result:", result);*/
   
   const newFile = vault.getAbstractFileByPath(newPath);

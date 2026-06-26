@@ -43,18 +43,6 @@ export async function decryptWithPassword(password: string, saltB64: string, ivB
   const data = base64ToBuffer(dataB64);
   const publicKey = base64ToBuffer(publicKeyB64);
 
-  // Import public key
-  const importedPublicKey = await crypto.subtle.importKey(
-    "raw",
-    publicKey,
-    {
-      name: "ECDH",
-      namedCurve: "P-256"
-    },
-    false,
-    []
-  );
-
   // Derive shared secret from password
   const keyMaterial = await getKeyMaterial(password);
   const sharedSecret = await deriveKey(keyMaterial, salt);

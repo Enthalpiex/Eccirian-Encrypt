@@ -1,4 +1,4 @@
-import { FileView, WorkspaceLeaf, ViewStateResult, App } from "obsidian";
+import { FileView, WorkspaceLeaf, ViewStateResult } from "obsidian";
 import { PasswordModal } from "../ui/passwordModal";
 import { TFile, Notice } from "obsidian";
 import { decryptWithPassword } from "../encryption/aesWithPassword";
@@ -17,7 +17,7 @@ export class EccirianView extends FileView {
     super(leaf);
     this.filePath = "";
     this.navigation = true;
-    this.plugin = (this.app as any).plugins.getPlugin('eccirian');
+    this.plugin = (this.app as any).plugins.getPlugin('eccirian-encrypt');
   }
 
   updateTitle(newTitle: string) {
@@ -36,7 +36,7 @@ export class EccirianView extends FileView {
     return "lock";
   }
 
-  async setState(state: any, result: ViewStateResult): Promise<void> {
+  async setState(state: Record<string, any>, result: ViewStateResult): Promise<void> {
     await super.setState(state, result);
 
     if (state?.file instanceof TFile) {
@@ -48,7 +48,7 @@ export class EccirianView extends FileView {
     await this.onOpen();
   }
 
-  getState(): any {
+  getState(): Record<string, any> {
     return {
       file: this.file,
       filePath: this.filePath,
@@ -88,19 +88,18 @@ export class EccirianView extends FileView {
 
     // 添加按钮悬停效果
     unlockBtn.addEventListener('mouseenter', () => {
-      unlockBtn.style.backgroundColor = "var(--background-secondary)";
-      unlockBtn.style.transform = "translateY(-1px)";
-      lockIcon.style.transform = "scale(1.1)";
+      unlockBtn.addClass('hover');
+      lockIcon.addClass('hover');
     });
 
     unlockBtn.addEventListener('mouseleave', () => {
-      unlockBtn.style.backgroundColor = "var(--background-primary)";
-      unlockBtn.style.transform = "translateY(0)";
-      lockIcon.style.transform = "scale(1)";
+      unlockBtn.removeClass('hover');
+      lockIcon.removeClass('hover');
     });
 
     // 添加点击事件
-    unlockBtn.addEventListener('click', async () => {
+    unlockBtn.addEventListener('click', () => {
+      (async () => {
       if (this.filePath) {
         const file = this.app.vault.getAbstractFileByPath(this.filePath);
         if (file instanceof TFile) {
@@ -160,7 +159,7 @@ export class EccirianView extends FileView {
                   ivMatch[1],
                   dataMatch[1]
                 );
-              } catch (err) {
+              } catch {
                 await changeFileExtension(this.app.vault, mdFile, "eccirian");
                 if (this.plugin.settings.showNotice) {
                   new Notice("Decryption failed: Password may be incorrect");
@@ -177,13 +176,13 @@ export class EccirianView extends FileView {
                 const leaf = this.app.workspace.getLeaf();
                 const originalFile = await changeFileExtension(this.app.vault, mdFile, originalExt);
                 await leaf.openFile(originalFile, { state: { mode: "source" } });
-              } catch (err) {
+              } catch {
                 const leaf = this.app.workspace.getLeaf();
                 await leaf.openFile(mdFile, { state: { mode: "source" } });
                 return;
               }
 
-            } catch (err) {
+            } catch {
               await changeFileExtension(this.app.vault, mdFile, "eccirian");
               if (this.plugin.settings.showNotice) {
                 new Notice("Decryption failed: Unexpected error");
@@ -194,7 +193,7 @@ export class EccirianView extends FileView {
           async () => {
             try {
               await changeFileExtension(this.app.vault, mdFile, "eccirian");
-            } catch (err) {
+            } catch {
               if (this.plugin.settings.showNotice) {
                 new Notice("Failed to restore file extension");
               }
@@ -207,11 +206,12 @@ export class EccirianView extends FileView {
           this.plugin.settings.encryptionMethod,
           this.plugin
         ).open();
-      } catch (err) {
+      } catch {
         if (this.plugin.settings.showNotice) {
           new Notice("Failed to change file extension");
         }
       }
+      })();
     });
   }
 

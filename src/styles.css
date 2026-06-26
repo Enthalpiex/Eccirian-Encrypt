@@ -58,3 +58,24 @@
     cursor: pointer;
   }
   
+  /* Settings Tab Logo */
+  .eccirian-logo-container {
+    text-align: center;
+    margin-bottom: 2rem;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  .eccirian-logo-image {
+    width: 200px;
+    height: auto;
+    object-fit: contain;
+  }
+  
+  /* Hover Interactions */
+  .eccirian-hover-lock:hover {
+    color: var(--text-accent);
+    transform: scale(1.1);
+    transition: transform 0.2s ease, color 0.2s ease;
+  }
+  

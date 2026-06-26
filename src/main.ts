@@ -1,6 +1,6 @@
-import { Plugin, TFile, Notice, WorkspaceLeaf } from "obsidian";
+import { Plugin, TFile, Notice } from "obsidian";
 import { encryptWithPassword, decryptWithPassword } from "./encryption/aesWithPassword";
-import { encryptWithPassword as eccEncrypt, decryptWithPassword as eccDecrypt } from "./encryption/eccWithPassword";
+import { encryptWithPassword as eccEncrypt } from "./encryption/eccWithPassword";
 import { PasswordModal } from "./ui/passwordModal";
 import { EccEncryptSettingTab } from "./ui/settingsTab";
 import { DEFAULT_SETTINGS, EccEncryptSettings } from "./settings";
@@ -40,7 +40,7 @@ export default class EccEncryptPlugin extends Plugin {
               new Notice("Only .md files can be converted to .eccirian");
             }
           }
-        } catch (err) {
+        } catch {
           // 静默失败
         }
       }
@@ -293,14 +293,14 @@ export default class EccEncryptPlugin extends Plugin {
           } else {
             new Notice("Only .md files can be converted to .eccirian");
           }
-        } catch (err) {
+        } catch {
           // 静默失败
         }
       });
     }
   }
 
-  async onunload() {
+  onunload() {
     if (this.toggleExtensionButton) {
       this.toggleExtensionButton.remove();
       this.toggleExtensionButton = null;

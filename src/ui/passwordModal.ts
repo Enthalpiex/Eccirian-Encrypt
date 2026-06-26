@@ -4,7 +4,7 @@ export class PasswordModal extends Modal {
   password: string = "";
   confirmPassword: string = "";
   hint: string = "";
-  onSuccess: (password: string, encryptionMethod: "AES" | "ECC", hint?: string) => void;
+  onSuccess: (password: string, encryptionMethod: "AES" | "ECC", hint?: string) => void | Promise<void>;
   onCancel: () => void;
   encryptionMode: "temporary" | "permanent" = "temporary";
   encryptionMethod: "AES" | "ECC" = "AES";
@@ -12,18 +12,18 @@ export class PasswordModal extends Modal {
   private isDecrypt: boolean = false;
   private requirePasswordConfirmation: boolean = false;
   private showHint: boolean = false;
-  private plugin: any;
+  private plugin: Plugin;
 
   constructor(
     app: App,
-    onSuccess: (password: string, encryptionMethod: "AES" | "ECC", hint?: string) => void,
+    onSuccess: (password: string, encryptionMethod: "AES" | "ECC", hint?: string) => void | Promise<void>,
     onCancel: () => void,
     defaultMode: "temporary" | "permanent" = "temporary",
     isDecrypt: boolean = false,
     requirePasswordConfirmation: boolean = false,
     showHint: boolean = false,
     defaultEncryptionMethod: "AES" | "ECC" = "AES",
-    plugin: any
+    plugin: Plugin
   ) {
     super(app);
     this.onSuccess = onSuccess;
@@ -85,7 +85,7 @@ export class PasswordModal extends Modal {
         text.inputEl.addEventListener('keypress', (e) => {
           if (e.key === 'Enter' && this.password) {
             if (!this.requirePasswordConfirmation || this.confirmPassword) {
-              this.submit();
+              await this.submit();
             }
           }
         });
@@ -104,7 +104,7 @@ export class PasswordModal extends Modal {
           text.inputEl.type = "password";
           text.inputEl.addEventListener('keypress', (e) => {
             if (e.key === 'Enter' && this.password && this.confirmPassword) {
-              this.submit();
+              await this.submit();
             }
           });
         });
@@ -129,8 +129,8 @@ export class PasswordModal extends Modal {
         button
           .setButtonText("Confirm")
           .setCta()
-          .onClick(() => {
-            this.submit();
+          .onClick(async () => {
+            await this.submit();
           });
       })
       .addButton(button => {
