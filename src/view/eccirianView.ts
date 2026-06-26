@@ -92,11 +92,11 @@ export class EccidianView extends FileView {
   async onOpen() {
     const container = this.containerEl.children[1];
     
-    const containerEl = this.containerEl as HTMLElement;
+    const containerEl = this.containerEl;
     containerEl.addClass('eccirian-view-container');
     containerEl.addClass('eccirian-lock-active');
 
-    const contentContainer = container as HTMLElement;
+    const contentContainer = container;
     contentContainer.addClass('eccirian-view-content');
 
     // Check if this is a folder encryption
@@ -279,7 +279,7 @@ export class EccidianView extends FileView {
                         }
                         
                         // Delete the existing file before overwriting
-                        await this.app.vault.delete(existing);
+                        await this.app.fileManager.trashFile(existing);
                       }
                       
                       await this.app.vault.createBinary(originalPath, arrayBuffer);
@@ -289,7 +289,7 @@ export class EccidianView extends FileView {
                       const restored = this.app.vault.getAbstractFileByPath(originalPath);
                       if (restored instanceof TFile) {
                         await this.leaf.openFile(restored);
-                        await this.app.vault.delete(encryptedSourceFile);
+                        await this.app.fileManager.trashFile(encryptedSourceFile);
                         if (this.plugin.settings.showNotice) new Notice(this.plugin.i18n.messageFileDecrypted || "File decrypted");
                       }
                       return;
@@ -311,6 +311,7 @@ export class EccidianView extends FileView {
             ).open();
             return;
           } catch {
+            // JSON parse failed -> fall through to %%ENC handling
           }
         }
         
@@ -412,7 +413,7 @@ export class EccidianView extends FileView {
                     return;
                   }
                   if (folderAction === "overwrite") {
-                    await this.app.vault.delete(existingFolderTarget, true);
+                    await this.app.fileManager.trashItem(existingFolderTarget);
                   }
                 }
 
@@ -423,7 +424,7 @@ export class EccidianView extends FileView {
                 if (this.file) {
                   this.plugin.clearFolderIndex(this.file.path);
                   await this.plugin.saveSettings();
-                  await this.app.vault.delete(this.file);
+                  await this.app.fileManager.trashFile(this.file);
                 }
                 
                 if (this.plugin.settings.showNotice) {
@@ -556,7 +557,7 @@ export class EccidianView extends FileView {
                         return;
                       }
                       if (folderAction === "overwrite") {
-                        await this.app.vault.delete(existingFolderTarget, true);
+                        await this.app.fileManager.trashItem(existingFolderTarget);
                       }
                     }
 
@@ -592,7 +593,7 @@ export class EccidianView extends FileView {
                     // Delete encrypted file
                     this.plugin.clearFolderIndex(encryptedFile.path);
                     await this.plugin.saveSettings();
-                    await this.app.vault.delete(encryptedFile);
+                    await this.app.fileManager.trashFile(encryptedFile);
                     
                     if (this.plugin.settings.showNotice) {
                       new Notice(`${this.plugin.i18n.messageFolderDecrypted} → ${targetPath}`);
@@ -684,12 +685,12 @@ export class EccidianView extends FileView {
                   }
                   
                   // Delete existing file before proceeding
-                  await this.app.vault.delete(existingOriginalFile);
+                  await this.app.fileManager.trashFile(existingOriginalFile);
                 }
 
                 const outputFile = await this.app.vault.create(targetPath, processedText);
                 await this.leaf.openFile(outputFile, { state: { mode: "source" } });
-                await this.app.vault.delete(encryptedFile);
+                await this.app.fileManager.trashFile(encryptedFile);
                 if (this.plugin.settings.showNotice) new Notice(this.plugin.i18n.messageFileDecrypted || "File decrypted");
               } catch {
                 return;
