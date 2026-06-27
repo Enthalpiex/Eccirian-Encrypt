@@ -1,6 +1,5 @@
 <img alt="Eccirian-trs" src="https://github.com/user-attachments/assets/4db2e6dc-e34c-414f-9b2b-67469dd05bf3" />
 
----
 
 [![Obsidian](https://img.shields.io/badge/Obsidian-1.4.0+-purple.svg)](https://obsidian.md) [![Stars](https://img.shields.io/github/stars/Enthalpiex/eccirian-Encrypt?style=social)](https://github.com/Enthalpiex/eccirian-Encrypt/stargazers)
 
