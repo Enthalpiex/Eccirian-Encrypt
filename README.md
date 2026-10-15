@@ -117,8 +117,6 @@ A: Main differences:
 
 ---
 
-## Contributing
-
 ## Star History
 
 <a href="https://www.star-history.com/?repos=enthalpiex%2Feccirian-encrypt&type=date&legend=top-left">
@@ -128,6 +126,10 @@ A: Main differences:
    <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=enthalpiex/eccirian-encrypt&type=date&legend=top-left" />
  </picture>
 </a>
+
+---
+
+## Contributing
 
 Issues and pull requests are welcome:
 [GitHub Issues](https://github.com/Enthalpiex/eccirian-encrypt/issues)
